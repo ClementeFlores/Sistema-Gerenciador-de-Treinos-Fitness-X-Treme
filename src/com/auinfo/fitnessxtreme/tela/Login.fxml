@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <FlowPane alignment="CENTER" prefHeight="90.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="341.0" fitWidth="997.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/logo.png" />
+               </image>
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
+            </ImageView>
+         </children>
+      </FlowPane>
+   </top>
+   <center>
+      <Button mnemonicParsing="false" text="Entrar no Sistema" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Button>
+   </center>
+</BorderPane>
