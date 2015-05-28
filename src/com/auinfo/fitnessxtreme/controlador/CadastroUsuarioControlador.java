@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.auinfo.fitnessxtreme.tela;
+package com.auinfo.fitnessxtreme.controlador;
 
 import com.auinfo.fitnessxtreme.modelo.Usuario;
 import java.net.URL;

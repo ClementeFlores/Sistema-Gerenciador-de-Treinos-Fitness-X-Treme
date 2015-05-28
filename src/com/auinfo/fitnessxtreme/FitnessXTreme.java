@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.stage.Stage;
 
 /**
@@ -21,7 +22,7 @@ public class FitnessXTreme extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/auinfo/fitnessxtreme/tela/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/auinfo/fitnessxtreme/tela/CadastroAula.fxml"));
         
         Scene scene = new Scene(root);
         

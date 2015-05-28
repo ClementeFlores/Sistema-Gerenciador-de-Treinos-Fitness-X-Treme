@@ -9,8 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.LoginControlador">
    <top>
       <FlowPane alignment="CENTER" prefHeight="90.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
@@ -32,4 +31,7 @@
          </font>
       </Button>
    </center>
+   <bottom>
+      <Accordion fx:id="aac" style="-fx-background-color: blue;" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
