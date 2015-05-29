@@ -51,9 +51,6 @@ public class Exercicio implements Serializable {
         @JoinColumn(name = "IDSERIE", referencedColumnName = "IDSERIE", nullable = false)})
     @ManyToMany
     private List<Serie> serieList;
-    @JoinColumn(name = "GURPOEXERCICIO_IDGURPOEXERCICIO", referencedColumnName = "IDGURPOEXERCICIO", nullable = false)
-    @ManyToOne(optional = false)
-    private GurpoexErcicio gurpoexercicioIdgurpoexercicio;
 
     public Exercicio() {
     }
@@ -105,14 +102,6 @@ public class Exercicio implements Serializable {
 
     public void setSerieList(List<Serie> serieList) {
         this.serieList = serieList;
-    }
-
-    public GurpoexErcicio getGurpoexercicioIdgurpoexercicio() {
-        return gurpoexercicioIdgurpoexercicio;
-    }
-
-    public void setGurpoexercicioIdgurpoexercicio(GurpoexErcicio gurpoexercicioIdgurpoexercicio) {
-        this.gurpoexercicioIdgurpoexercicio = gurpoexercicioIdgurpoexercicio;
     }
 
     @Override

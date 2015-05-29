@@ -47,8 +47,6 @@ public class Usuario implements Serializable {
     @Column(name = "DATANASCIMENTO", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date datanascimento;
-    @Column(name = "CPF", length = 45)
-    private String cpf;
     @Basic(optional = false)
     @Column(name = "INDICADORDIREITO", nullable = false, length = 1000)
     private String indicadordireito;
@@ -115,14 +113,6 @@ public class Usuario implements Serializable {
 
     public void setDatanascimento(Date datanascimento) {
         this.datanascimento = datanascimento;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getIndicadordireito() {

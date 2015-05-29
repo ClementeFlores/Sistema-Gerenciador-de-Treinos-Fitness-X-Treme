@@ -6,7 +6,6 @@
 package com.auinfo.fitnessxtreme.modelo;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Calendar;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
