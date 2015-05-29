@@ -7,11 +7,12 @@ package com.auinfo.fitnessxtreme;
  */
 
 
+import java.util.Calendar;
+import java.util.Date;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Accordion;
 import javafx.stage.Stage;
 
 /**
@@ -27,6 +28,7 @@ public class FitnessXTreme extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        
         stage.show();
     }
 
