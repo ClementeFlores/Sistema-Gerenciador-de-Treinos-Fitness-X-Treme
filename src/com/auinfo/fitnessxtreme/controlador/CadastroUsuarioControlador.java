@@ -7,13 +7,13 @@ package com.auinfo.fitnessxtreme.controlador;
 
 import com.auinfo.fitnessxtreme.modelo.Usuario;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
+import javafx.beans.property.BooleanProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -46,27 +46,32 @@ public class CadastroUsuarioControlador implements Initializable {
     @FXML
     private CheckBox isAdministrador;
     
+    @FXML
+    private PasswordField campoSenha;
+    
     /**
      * Construtor da Classe, chamado antes do initialize.
      */
     public CadastroUsuarioControlador() {
-        
     }
     
     /**
      * Método que é iniciado por padrão e automaticamente após o carregamento do arquivo FXML
      */
-    @FXML
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Carregar os dados da tabela
-//        List<Usuario> usuarios = new ArrayList<>();
-//        usuarios.
-//        tabelaUsuario.setItems(FXCollections.observableArrayList(usuarios));
-//
-//        colunaMatricula.setCellValueFactory(new PropertyValueFactory<> ("Merda"));
-//        colunaNome.setCellFactory(cellData -> cellData.getCell);
+
+        colunaMatricula.setCellValueFactory(new PropertyValueFactory<> ("Matrícula"));
+        colunaNome.setCellValueFactory(new PropertyValueFactory<> ("Nome"));
+        
+        System.out.println("Começar a criar o user");
+        Usuario user = new Usuario();
+        user.setNome("Sebastião Pereira Vida Loka");
+        user.setMatricula(123456);
+        
+        System.out.println("Usuario criado, setar pra exibir na tela");
+        mostrarDadosUsuario(user);
         
     }
 
@@ -77,6 +82,28 @@ public class CadastroUsuarioControlador implements Initializable {
             System.out.println("Procura inválida");
         } else {
             //procurar o campo e selecioná-lo na tabela
+        }
+    }
+    
+    /**
+     * Método responsável por cuidar do estado do campo de senha, através do estado da checkbox administrador
+     * @param event 
+     */
+    @FXML
+    private void handleCheckboxIsAdministrador(ActionEvent event) {
+        BooleanProperty selecionado = isAdministrador.selectedProperty();
+
+        
+    }
+    
+    private void mostrarDadosUsuario (Usuario usuario) {
+        if (usuario != null) {
+            campoMatricula.setText(String.valueOf(usuario.getMatricula()));
+            campoNome.setText(usuario.getNome());
+
+        } else {
+            campoMatricula.setText("");
+            campoNome.setText("");
         }
     }
 
