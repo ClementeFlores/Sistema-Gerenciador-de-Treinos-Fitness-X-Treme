@@ -5,111 +5,116 @@
  */
 package com.auinfo.fitnessxtreme.modelo;
 
-import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  *
  * @author BrunoRicardo
  */
-@Entity
-@Table(name = "SERIE")
-@NamedQueries({
-    @NamedQuery(name = "Serie.findAll", query = "SELECT s FROM Serie s")})
-public class Serie implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "IDSERIE", nullable = false)
-    private Integer idserie;
-    @Basic(optional = false)
-    @Column(name = "SERIE", nullable = false)
-    private int serie;
-    @Basic(optional = false)
-    @Column(name = "QUANTIDADE", nullable = false)
-    private int quantidade;
-    @ManyToMany(mappedBy = "serieList")
-    private List<Exercicio> exercicioList;
+public class Serie {
+
+    private int idSerie;
+    private String nomeSerie;
+    private String descSerie;
+    private Date dataInicio;
+    private Date dataFim;
+    private Double peso1;
+    private Double peso2;
+    private Double peso3;
+    private List<Aula> aulaList;
+    private Usuario usuario;
 
     public Serie() {
     }
 
-    public Serie(Integer idserie) {
-        this.idserie = idserie;
+    public Serie(int idserie) {
+        this.idSerie = idserie;
     }
 
-    public Serie(Integer idserie, int serie, int quantidade) {
-        this.idserie = idserie;
-        this.serie = serie;
-        this.quantidade = quantidade;
+    public Serie(int idserie, Date datainicio, Date datafim) {
+        this.idSerie = idserie;
+        this.dataInicio = datainicio;
+        this.dataFim = datafim;
     }
 
-    public Integer getIdserie() {
-        return idserie;
+    public int getIdSerie() {
+        return idSerie;
     }
 
-    public void setIdserie(Integer idserie) {
-        this.idserie = idserie;
+    public void setIdSerie(int idserie) {
+        this.idSerie = idserie;
     }
 
-    public int getSerie() {
-        return serie;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public void setSerie(int serie) {
-        this.serie = serie;
+    public void setDataInicio(Date datainicio) {
+        this.dataInicio = datainicio;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public Date getDataFim() {
+        return dataFim;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setDataFim(Date datafim) {
+        this.dataFim = datafim;
     }
 
-    public List<Exercicio> getExercicioList() {
-        return exercicioList;
+    public Double getPeso1() {
+        return peso1;
     }
 
-    public void setExercicioList(List<Exercicio> exercicioList) {
-        this.exercicioList = exercicioList;
+    public void setPeso1(Double peso1) {
+        this.peso1 = peso1;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idserie != null ? idserie.hashCode() : 0);
-        return hash;
+    public Double getPeso2() {
+        return peso2;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Serie)) {
-            return false;
-        }
-        Serie other = (Serie) object;
-        if ((this.idserie == null && other.idserie != null) || (this.idserie != null && !this.idserie.equals(other.idserie))) {
-            return false;
-        }
-        return true;
+    public void setPeso2(Double peso2) {
+        this.peso2 = peso2;
     }
 
-    @Override
-    public String toString() {
-        return "com.auinfo.fitnessxtreme.modelo.Serie[ idserie=" + idserie + " ]";
+    public Double getPeso3() {
+        return peso3;
     }
-    
+
+    public void setPeso3(Double peso3) {
+        this.peso3 = peso3;
+    }
+
+    public List<Aula> getAulaList() {
+        return aulaList;
+    }
+
+    public void setAulaList(List<Aula> aulaList) {
+        this.aulaList = aulaList;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario idusuario) {
+        this.usuario = idusuario;
+    }
+
+    public String getNomeSerie() {
+        return nomeSerie;
+    }
+
+    public String getDescSerie() {
+        return descSerie;
+    }
+
+    public void setNomeSerie(String nomeSerie) {
+        this.nomeSerie = nomeSerie;
+    }
+
+    public void setDescSerie(String descSerie) {
+        this.descSerie = descSerie;
+    }
 }

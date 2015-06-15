@@ -1,141 +1,89 @@
--- -----------------------------------------------------
--- Schema FitnessXtreme
--- -----------------------------------------------------
-CREATE SCHEMA FitnessXtreme;
+CREATE SCHEMA IF NOT EXISTS FITNESSXTREME;
 
--- -----------------------------------------------------
--- Table Usuario
--- -----------------------------------------------------
-CREATE TABLE  FitnessXtreme.Usuario (
-  idUsuario INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(100) NOT NULL,
-  matricula INT NOT NULL,
-  dataNascimento DATE NOT NULL,
-  cpf VARCHAR(45),
-  indicadorDireito VARCHAR(1000) NOT NULL,
-  indicadorEsquerdo VARCHAR(1000) NOT NULL,
-  senha VARCHAR(50),
-  dataCadastramento DATE NOT NULL,
-  eAdministrador SMALLINT(1) NOT NULL,
-  PRIMARY KEY (idUsuario));
-
--- -----------------------------------------------------
--- Tabela Aula
--- -----------------------------------------------------
-CREATE TABLE  FitnessXtreme.Aula (
-  idAula INT NOT NULL AUTO_INCREMENT,
-  Objetivo VARCHAR(200) NOT NULL,
-  descAula VARCHAR(100),
-  Usuario_idUsuario INT NOT NULL,
-  dataInicioSerie DATE NOT NULL,
-  dataFimSerie DATE NOT NULL,
-  observacao VARCHAR(200) NOT NULL,
-  dataAula DATE NOT NULL,
-  repetirToda VARCHAR(50) NOT NULL,
-  tempoEsteira VARCHAR(10),
-  tempoBicicleta VARCHAR(10),
-  tempoElipticon VARCHAR(10),
-  PRIMARY KEY (idAula),  
-  CONSTRAINT fk_AulaUsuario
-    FOREIGN KEY (Usuario_idUsuario)
-    REFERENCES FitnessXtreme.Usuario (idUsuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
--- -----------------------------------------------------
--- Tabela Serie
--- -----------------------------------------------------
-CREATE TABLE  FitnessXtreme.Serie (
-  idSerie INT NOT NULL AUTO_INCREMENT,
-  serie INT NOT NULL,
-  quantidade INT NOT NULL,
-  PRIMARY KEY (idSerie));
-
--- -----------------------------------------------------
--- Tabela Peso
--- -----------------------------------------------------
-CREATE TABLE  FitnessXtreme.Peso (
-  idPeso INT NOT NULL AUTO_INCREMENT,
-  peso INT NOT NULL,
-  PRIMARY KEY (idPeso));
+CREATE TABLE Exercicio (
+                idExercicio IDENTITY NOT NULL,
+                nomeExercicio VARCHAR(100) NOT NULL,
+                CONSTRAINT idExercicio PRIMARY KEY (idExercicio)
+);
 
 
--- -----------------------------------------------------
--- Tabela GurpoExercicio
--- -----------------------------------------------------
-CREATE TABLE  FitnessXtreme.GurpoExercicio (
-  idGurpoExercicio INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(50) NOT NULL,
-  PRIMARY KEY (idGurpoExercicio));
+CREATE TABLE Usuario (
+                idUsuario IDENTITY NOT NULL,
+                matricula INTEGER NOT NULL,
+				dataNascimento DATE NOT NULL,
+                indicadorDireito VARCHAR(1000) NOT NULL,
+                indicadorEsquerdo VARCHAR(1000) NOT NULL,
+                senha VARCHAR(50),
+                objetivo VARCHAR(200) NOT NULL,
+                nome VARCHAR(100) NOT NULL,
+                observacao VARCHAR(200),
+                dataCadastramento DATE NOT NULL,				
+                eAdministrador BOOLEAN NOT NULL,
+                CONSTRAINT idUsuario PRIMARY KEY (idUsuario)
+);
 
 
--- -----------------------------------------------------
--- Tabela Exercicio
--- -----------------------------------------------------
-CREATE TABLE  FitnessXtreme.Exercicio (
-  idExercicio INT NOT NULL AUTO_INCREMENT,
-  nomeExercicio VARCHAR(100) NOT NULL,
-  GurpoExercicio_idGurpoExercicio INT NOT NULL,
-  PRIMARY KEY (idExercicio),
-  CONSTRAINT fk_Exercicio_GurpoExercicio
-    FOREIGN KEY (GurpoExercicio_idGurpoExercicio)
-    REFERENCES FitnessXtreme.GurpoExercicio (idGurpoExercicio)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE UNIQUE INDEX matricula
+ ON Usuario
+ ( matricula ASC );
+
+CREATE TABLE Serie (
+                idSerie IDENTITY NOT NULL,
+                dataInicio DATE NOT NULL,
+                dataFim DATE NOT NULL,
+				nomeSerie VARCHAR(100) NOT NULL,
+				descSerie VARCHAR(200),
+                peso1 DOUBLE,
+                peso2 DOUBLE,
+                peso3 DOUBLE,
+                idUsuario INTEGER NOT NULL,
+                CONSTRAINT idSerie PRIMARY KEY (idSerie)
+);
 
 
--- -----------------------------------------------------
--- Tabela ExercicioPeso
--- -----------------------------------------------------
-CREATE TABLE  FitnessXtreme.ExercicioPeso (
-  idExercicio INT NOT NULL,
-  idPeso INT NOT NULL,
-  PRIMARY KEY (idExercicio, idPeso),
-  CONSTRAINT fk_ExercicioPeso_Exercicio
-    FOREIGN KEY (idExercicio)
-    REFERENCES FitnessXtreme.Exercicio (idExercicio)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_ExercicioPeso_Peso
-    FOREIGN KEY (idPeso)
-    REFERENCES FitnessXtreme.Peso (idPeso)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE Aula (
+                idAula IDENTITY NOT NULL,
+                descAula VARCHAR(100) NOT NULL,                
+                repetir VARCHAR(20) NOT NULL,
+                tempoEsteira INTEGER,
+                tempoBicicleta INTEGER,
+                tempoElipticon INTEGER,
+                impresso INTEGER DEFAULT 0 NOT NULL,
+                idSerie INTEGER NOT NULL,
+                CONSTRAINT idAula PRIMARY KEY (idAula)
+);
 
 
--- -----------------------------------------------------
--- Tabela ExercicioSerie
--- -----------------------------------------------------
-CREATE TABLE  FitnessXtreme.ExercicioSerie (
-  idExercicio INT NOT NULL,
-  idSerie INT NOT NULL,
-  PRIMARY KEY (idExercicio, idSerie),
-  CONSTRAINT fk_ExercicioSerie_Exercicio
-    FOREIGN KEY (idExercicio)
-    REFERENCES FitnessXtreme.Exercicio (idExercicio)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_ExercicioSerie_Serie
-    FOREIGN KEY (idSerie)
-    REFERENCES FitnessXtreme.Serie (idSerie)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE AulaExercicio (
+                idAula INTEGER NOT NULL,
+                idExercicio INTEGER NOT NULL,
+				serie INTEGER NOT NULL,
+				quantidade INTEGER NOT NULL,
+				peso INTEGER NOT NULL,
+                CONSTRAINT AulaExercicio_pk PRIMARY KEY (idAula, idExercicio)
+);
 
 
--- -----------------------------------------------------
--- Tabela AulaExercicio
--- -----------------------------------------------------
-CREATE TABLE  FitnessXtreme.AulaExercicio (
-  idAula INT NOT NULL,
-  idExercicio INT NOT NULL,
-  PRIMARY KEY (idAula, idExercicio),
-  CONSTRAINT fk_AulaExercicio_Aula
-    FOREIGN KEY (idAula)
-    REFERENCES FitnessXtreme.Aula (idAula)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_AulaExercicio_Exercicio
-    FOREIGN KEY (idExercicio)
-    REFERENCES FitnessXtreme.Exercicio (idExercicio)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+ALTER TABLE AulaExercicio ADD CONSTRAINT Exercicio_ExercicioAula_fk
+FOREIGN KEY (idExercicio)
+REFERENCES Exercicio (idExercicio)
+ON DELETE NO ACTION
+ON UPDATE CASCADE;
+
+ALTER TABLE Serie ADD CONSTRAINT Usuario_Serie_fk
+FOREIGN KEY (idUsuario)
+REFERENCES Usuario (idUsuario)
+ON DELETE NO ACTION
+ON UPDATE CASCADE;
+
+ALTER TABLE Aula ADD CONSTRAINT Serie_Aula_fk
+FOREIGN KEY (idSerie)
+REFERENCES Serie (idSerie)
+ON DELETE NO ACTION
+ON UPDATE CASCADE;
+
+ALTER TABLE AulaExercicio ADD CONSTRAINT Aula_ExercicioAula_fk
+FOREIGN KEY (idAula)
+REFERENCES Aula (idAula)
+ON DELETE NO ACTION
+ON UPDATE CASCADE;

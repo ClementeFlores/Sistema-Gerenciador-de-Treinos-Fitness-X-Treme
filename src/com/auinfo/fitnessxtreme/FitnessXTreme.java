@@ -7,13 +7,12 @@ package com.auinfo.fitnessxtreme;
  */
 
 
-import java.util.Calendar;
-import java.util.Date;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -21,14 +20,20 @@ import javafx.stage.Stage;
  */
 public class FitnessXTreme extends Application {
     
+    public static Scene scenes;
+    
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/auinfo/fitnessxtreme/tela/CadastroAula.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/auinfo/fitnessxtreme/tela/TelaBase.fxml"));
         
         Scene scene = new Scene(root);
         
-        stage.setScene(scene);
+        scenes = scene;
         
+        stage.setScene(scene);
+        //stage.setFullScreen(true);
+        //stage.initStyle(StageStyle.UNDECORATED);  
+
         stage.show();
     }
 

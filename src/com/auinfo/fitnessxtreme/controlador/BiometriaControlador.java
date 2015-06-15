@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author BrunoRicardo
  */
-public class PrincipalControlador implements Initializable {
+public class BiometriaControlador implements Initializable {
 
     /**
      * Initializes the controller class.

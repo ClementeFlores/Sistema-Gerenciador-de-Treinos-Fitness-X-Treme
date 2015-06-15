@@ -1,11 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.ConsultaAulaControlador">
-    
+<AnchorPane id="AnchorPane" fx:id="principal" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.ConsultaAulaControlador">
+   <children>
+      <SplitPane dividerPositions="0.5601202404809619" layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <SplitPane>
+               <items>
+                  <AnchorPane id="AnchorPane">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="483.0" layoutY="14.0" text="Exercícios da Aula" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tvExercicios" layoutX="14.0" layoutY="163.0" prefHeight="430.0" prefWidth="545.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="163.0">
+                           <columns>
+                              <TableColumn fx:id="tcExercicio" prefWidth="333.0" text="Exercicio" />
+                              <TableColumn fx:id="tcSerie" prefWidth="97.0" text="Serie" />
+                              <TableColumn fx:id="tcPeso" prefWidth="100.0" text="Peso" />
+                           </columns>
+                        </TableView>
+                        <Label fx:id="lbCliente" layoutX="5.0" layoutY="59.0" text="Cliente" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                           <font>
+                              <Font name="System Bold" size="23.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cbAulas" layoutX="14.0" layoutY="124.0" prefHeight="31.0" prefWidth="425.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="125.0" />
+                        <Label layoutX="14.0" layoutY="101.0" text="Selecione a aula:" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                        <Button fx:id="btEditarAula" layoutX="440.0" layoutY="124.0" mnemonicParsing="false" prefWidth="31.0" text="e" AnchorPane.rightAnchor="85.0" />
+                        <Button fx:id="btNovaAula" layoutX="495.0" layoutY="124.0" mnemonicParsing="false" prefWidth="31.0" text="+" AnchorPane.rightAnchor="45.0" />
+                        <Button fx:id="btRemoverAula" layoutX="510.0" layoutY="124.0" mnemonicParsing="false" prefWidth="31.0" text="-" AnchorPane.rightAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+            <SplitPane prefHeight="200.0" prefWidth="200.0">
+               <items>
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="5.0" layoutY="5.0" style="-fx-border-color: black;" text="Informações da Aula" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font>
+                              </Label>
+                              <GridPane hgap="5.0" layoutX="5.0" layoutY="60.0" style="-fx-border-color: black;" vgap="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
+                                 <children>
+                                    <Label text="Nome:" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Dia da Semana:" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Tempo Bicicleta:" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Tempo Elipticon:" GridPane.rowIndex="4">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Tempo Esteira:" GridPane.rowIndex="5">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Quantidade de Impressões:" GridPane.rowIndex="6">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbNomeAula" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label fx:id="lbDiaDaSemana" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="lbTempoBicicleta" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label fx:id="lbTempoElipticon" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="lbTempoEsteira" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label fx:id="lbQtdImpressao" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="486.0" minWidth="10.0" prefWidth="481.0" />
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="708.0" minWidth="10.0" prefWidth="502.0" />
+                                 </columnConstraints>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="5.0" layoutY="5.0" style="-fx-border-color: black;" text="Informações da Série" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font>
+                              </Label>
+                              <GridPane hgap="5.0" layoutX="5.0" layoutY="60.0" style="-fx-border-color: black;" vgap="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
+                                 <children>
+                                    <Label text="Nome:" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Descrição:" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Data Inicio:" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Data Término:" GridPane.rowIndex="4">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Peso Primeiro Mês" GridPane.rowIndex="5">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Peso Terceiro Mês" GridPane.rowIndex="7">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Peso Segundo Mês" GridPane.rowIndex="6">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label fx:id="lbDescricao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="lbDataInicio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label fx:id="lbDataFim" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="lbPeso1" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label fx:id="lbPeso2" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label fx:id="lbPeso3" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="486.0" minWidth="10.0" prefWidth="481.0" />
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="708.0" minWidth="10.0" prefWidth="502.0" />
+                                 </columnConstraints>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </items>
+            </SplitPane>
+         </items>
+      </SplitPane>
+   </children>
 </AnchorPane>

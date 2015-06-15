@@ -5,98 +5,43 @@
  */
 package com.auinfo.fitnessxtreme.modelo;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
  * @author BrunoRicardo
  */
-@Entity
-@Table(name = "USUARIO")
-@NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
-public class Usuario implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "IDUSUARIO", nullable = false)
-    private Integer idusuario;
-    @Basic(optional = false)
-    @Column(name = "NOME", nullable = false, length = 100)
-    private String nome;
-    @Basic(optional = false)
-    @Column(name = "MATRICULA", nullable = false)
+public class Usuario {
+
+    private int idUsuario;
     private int matricula;
-    @Basic(optional = false)
-    @Column(name = "DATANASCIMENTO", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date datanascimento;
-    @Basic(optional = false)
-    @Column(name = "INDICADORDIREITO", nullable = false, length = 1000)
     private String indicadordireito;
-    @Basic(optional = false)
-    @Column(name = "INDICADORESQUERDO", nullable = false, length = 1000)
     private String indicadoresquerdo;
-    @Column(name = "SENHA", length = 50)
     private String senha;
-    @Basic(optional = false)
-    @Column(name = "DATACADASTRAMENTO", nullable = false)
-    @Temporal(TemporalType.DATE)
+    private String objetivo;
+    private String nome;
+    private String observacao;
     private Date datacadastramento;
-    @Basic(optional = false)
-    @Column(name = "EADMINISTRADOR", nullable = false)
-    private short eadministrador;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioIdusuario")
-    private List<Aula> aulaList;
+    private Boolean eadministrador;
+    private Date datanascimento;
 
     public Usuario() {
     }
 
-    public Usuario(Integer idusuario) {
-        this.idusuario = idusuario;
+    public Usuario(int idusuario) {
+        this.idUsuario = idusuario;
     }
 
-    public Usuario(Integer idusuario, String nome, int matricula, Date datanascimento, String indicadordireito, String indicadoresquerdo, Date datacadastramento, short eadministrador) {
-        this.idusuario = idusuario;
-        this.nome = nome;
+    public Usuario(int idusuario, int matricula, String indicadordireito, String indicadoresquerdo, String objetivo, String nome, Date datacadastramento, Boolean eadministrador, Date datanascimento) {
+        this.idUsuario = idusuario;
         this.matricula = matricula;
-        this.datanascimento = datanascimento;
         this.indicadordireito = indicadordireito;
         this.indicadoresquerdo = indicadoresquerdo;
+        this.objetivo = objetivo;
+        this.nome = nome;
         this.datacadastramento = datacadastramento;
         this.eadministrador = eadministrador;
-    }
-
-    public Integer getIdusuario() {
-        return idusuario;
-    }
-
-    public void setIdusuario(Integer idusuario) {
-        this.idusuario = idusuario;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+        this.datanascimento = datanascimento;
     }
 
     public int getMatricula() {
@@ -105,14 +50,6 @@ public class Usuario implements Serializable {
 
     public void setMatricula(int matricula) {
         this.matricula = matricula;
-    }
-
-    public Date getDatanascimento() {
-        return datanascimento;
-    }
-
-    public void setDatanascimento(Date datanascimento) {
-        this.datanascimento = datanascimento;
     }
 
     public String getIndicadordireito() {
@@ -139,6 +76,30 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    public String getObjetivo() {
+        return objetivo;
+    }
+
+    public void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
     public Date getDatacadastramento() {
         return datacadastramento;
     }
@@ -147,45 +108,32 @@ public class Usuario implements Serializable {
         this.datacadastramento = datacadastramento;
     }
 
-    public short getEadministrador() {
+    public Boolean getEadministrador() {
         return eadministrador;
     }
 
-    public void setEadministrador(short eadministrador) {
+    public void setEadministrador(Boolean eadministrador) {
         this.eadministrador = eadministrador;
     }
 
-    public List<Aula> getAulaList() {
-        return aulaList;
+    public Date getDatanascimento() {
+        return datanascimento;
     }
 
-    public void setAulaList(List<Aula> aulaList) {
-        this.aulaList = aulaList;
+    public void setDatanascimento(Date datanascimento) {
+        this.datanascimento = datanascimento;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idusuario != null ? idusuario.hashCode() : 0);
-        return hash;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        if ((this.idusuario == null && other.idusuario != null) || (this.idusuario != null && !this.idusuario.equals(other.idusuario))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.auinfo.fitnessxtreme.modelo.Usuario[ idusuario=" + idusuario + " ]";
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
     
+    @Override
+    public String toString(){
+        return nome;
+    }
 }

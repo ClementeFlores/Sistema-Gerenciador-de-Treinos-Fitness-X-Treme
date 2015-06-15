@@ -7,7 +7,9 @@ package com.auinfo.fitnessxtreme.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -16,12 +18,15 @@ import javafx.fxml.Initializable;
  */
 public class ConfiguracaoControlador implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private AnchorPane principal;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        AnchorPane.setTopAnchor(principal, 0d);
+        AnchorPane.setRightAnchor(principal, 0d);
+        AnchorPane.setLeftAnchor(principal, 0d);
+        AnchorPane.setBottomAnchor(principal, 0d);
+    }
+
 }

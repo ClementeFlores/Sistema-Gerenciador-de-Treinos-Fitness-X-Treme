@@ -9,29 +9,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.LoginControlador">
-   <top>
-      <FlowPane alignment="CENTER" prefHeight="90.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="341.0" fitWidth="997.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imagens/logo.png" />
-               </image>
-               <FlowPane.margin>
-                  <Insets />
-               </FlowPane.margin>
-            </ImageView>
-         </children>
-      </FlowPane>
-   </top>
-   <center>
-      <Button mnemonicParsing="false" text="Entrar no Sistema" BorderPane.alignment="CENTER">
+<AnchorPane fx:id="principal" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #fcfcfc;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.LoginControlador">
+   <children>
+      <ImageView fitWidth="1000.0" layoutX="131.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@imagens/logo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btLogar" alignment="CENTER" layoutX="338.0" layoutY="387.0" mnemonicParsing="false" text="Entrar no Sistema" AnchorPane.bottomAnchor="100.0">
          <font>
             <Font size="37.0" />
          </font>
       </Button>
-   </center>
-   <bottom>
-      <Accordion fx:id="aac" style="-fx-background-color: blue;" BorderPane.alignment="CENTER" />
-   </bottom>
-</BorderPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.BiometriaControlador">
+   <children>
+      <Label alignment="CENTER" layoutX="259.0" layoutY="14.0" text="Cadastro de Digital" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Pane layoutX="358.0" layoutY="122.0" prefHeight="255.0" prefWidth="200.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Text layoutX="39.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Posicione o indicador direito no sensor:" />
+   </children>
+</AnchorPane>

@@ -1,6 +1,7 @@
 package com.auinfo.fitnessxtreme.impressora;
 
 
+import com.auinfo.fitnessxtreme.modelo.Usuario;
 import java.text.Normalizer;
 
 /*
@@ -21,7 +22,7 @@ public class Impressora {
         
     }
     
-    private boolean geraCupom () {
+    public boolean geraCupom (Usuario usuario) {
         if (1 != 1 ) { //der merda
             return false;
         } else return true;

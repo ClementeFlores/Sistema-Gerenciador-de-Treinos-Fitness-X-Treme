@@ -5,19 +5,38 @@
  */
 package com.auinfo.fitnessxtreme.controlador;
 
+import com.auinfo.fitnessxtreme.biometria.LeitorBiometrico;
+import com.auinfo.fitnessxtreme.controlador.dao.UsuarioDao;
+import com.auinfo.fitnessxtreme.modelo.UsuarioTV;
 import com.auinfo.fitnessxtreme.modelo.Usuario;
+import com.auinfo.fitnessxtreme.util.Validacao;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.beans.property.BooleanProperty;
-import javafx.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -26,85 +45,366 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class CadastroUsuarioControlador implements Initializable {
 
     @FXML
-    private TableView<Usuario> tabelaUsuario;
+    private TextField tfObservacao;
 
     @FXML
-    private TableColumn<Usuario, Integer> colunaMatricula;
+    private CheckBox cbAdministrador;
 
     @FXML
-    private TableColumn<Usuario, String> colunaNome;
+    private DatePicker dpCad;
 
     @FXML
-    private TextField campoProcurar;
+    private TextField tfMatricula;
 
     @FXML
-    private TextField campoMatricula;
+    private TextField tfId;
 
     @FXML
-    private TextField campoNome;
+    private TextField tfPesquisar;
 
     @FXML
-    private CheckBox isAdministrador;
-    
+    private TableView<UsuarioTV> tvUsuario;
+
     @FXML
-    private PasswordField campoSenha;
-    
-    /**
-     * Construtor da Classe, chamado antes do initialize.
-     */
-    public CadastroUsuarioControlador() {
-    }
-    
-    /**
-     * Método que é iniciado por padrão e automaticamente após o carregamento do arquivo FXML
-     */
-    
+    private TableColumn<?, ?> tcMatricula;
+
+    @FXML
+    private TableColumn<?, ?> tcNome;
+
+    @FXML
+    private TableColumn<?, ?> tcEAdministrador;
+
+    @FXML
+    private PasswordField pfSenha;
+
+    @FXML
+    private DatePicker dpNasc;
+
+    @FXML
+    private TextField tfObjetivo;
+
+    @FXML
+    private TextField tfNome;
+
+    @FXML
+    private Button btSalvar;
+
+    @FXML
+    private Button btRemover;
+
+    @FXML
+    private Button btNovo;
+
+    @FXML
+    private AnchorPane principal;
+
+    @FXML
+    private Button btDireito;
+
+    @FXML
+    private Button btEsquerdo;
+
+    int index = -1;
+
+    String digDireito, digEsquero;
+
+    ObservableList<UsuarioTV> usuarios;
+
+    UsuarioDao uDao = new UsuarioDao();
+
+    Navegacao nav = new Navegacao();
+
+    FilteredList<UsuarioTV> filteredUsuarios;
+    private boolean validar[] = {false, false, false, false, false, false};
+    Validacao valida = new Validacao();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        colunaMatricula.setCellValueFactory(new PropertyValueFactory<> ("Matrícula"));
-        colunaNome.setCellValueFactory(new PropertyValueFactory<> ("Nome"));
-        
-        System.out.println("Começar a criar o user");
-        Usuario user = new Usuario();
-        user.setNome("Sebastião Pereira Vida Loka");
-        user.setMatricula(123456);
-        
-        System.out.println("Usuario criado, setar pra exibir na tela");
-        mostrarDadosUsuario(user);
-        
+        AnchorPane.setTopAnchor(principal, 0d);
+        AnchorPane.setRightAnchor(principal, 0d);
+        AnchorPane.setLeftAnchor(principal, 0d);
+        AnchorPane.setBottomAnchor(principal, 0d);
+
+        TelaBaseControlador.ANTERIOR = "MenuPrincipal";
+
+        validaBotoesSalvar(true);
+        pfSenha.setDisable(true);
+        uDao.abreConnection();
+        List<Usuario> listUsuario = uDao.getLista();
+        uDao.fechaConnection();
+
+        usuarios = FXCollections.observableArrayList();
+
+        listUsuario.forEach(u -> usuarios.add(new UsuarioTV(u)));
+        filteredUsuarios = new FilteredList<>(usuarios);
+
+        tcMatricula.setCellValueFactory(new PropertyValueFactory("matricula"));
+        tcNome.setCellValueFactory(new PropertyValueFactory("nome"));
+        tcEAdministrador.setCellValueFactory(new PropertyValueFactory("eAdministrador"));
+
+        tvUsuario.setItems(filteredUsuarios);
+
+        //Action Event
+        btSalvar.setOnAction(event -> cadastrar());
+        btNovo.setOnAction(event -> novo());
+        btRemover.setOnAction(event -> remover());
+        btDireito.setOnAction(event -> digDireito = cadDigital(1));
+        btEsquerdo.setOnAction(event -> digEsquero = cadDigital(2));
+        cbAdministrador.setOnAction(event -> validaAdministrador());
+        tvUsuario.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                usuarioToForm();
+            }
+        });
+
+        //Key Released Event
+        tfPesquisar.setOnKeyReleased(event -> pesquisar());
+
+        tfMatricula.setOnKeyReleased(event -> validar[0] = valida.validaNumero(tfMatricula,1));
+        tfNome.setOnKeyReleased(event -> validar[1] = valida.validaTexto(tfNome,10));
+        tfObjetivo.setOnKeyReleased(event -> validar[3] = valida.validaTexto(tfObjetivo,5));
+        dpNasc.setOnAction(event -> validar[2] = valida.validaData(dpNasc));
+        dpCad.setOnAction(event -> validar[4] = valida.validaData(dpCad));
+        pfSenha.setOnKeyReleased(event -> validar[5] = valida.validaPf(pfSenha,6));
+
+        filteredUsuarios.setPredicate(u -> true);
+
     }
 
-    @FXML
-    private void handleBotaoProcurar() {
-        String procura = campoProcurar.getText();
-        if (procura.equalsIgnoreCase("") || procura.length() == 0) {
-            System.out.println("Procura inválida");
-        } else {
-            //procurar o campo e selecioná-lo na tabela
+    private void pesquisar() {
+        filteredUsuarios.setPredicate(u -> u.filtrar(tfPesquisar.getText()));
+    }
+
+    private void cadastrar() {
+        if (!validar()) {
+            return;
+        }
+
+        Usuario u = formToUsuario();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+
+        if ("Cadastrar".equals(btSalvar.getText())) {
+            uDao.abreConnection();
+            u.setIdUsuario(uDao.adicionaUsuario(u));
+            if (u.getIdUsuario() != 0) {
+                System.out.println("Cadastrado");
+                usuarios.add(new UsuarioTV(u));
+                alert.setTitle("Cadastro de Usuario");
+                alert.setContentText("Usuario cadastrado com sucesso!");
+                alert.showAndWait();
+            } else {
+                System.out.println("Erro ao cadastrar");
+                alert.setTitle("Cadastro de Usuario");
+                alert.setContentText("Erro ao cadastrar o Usuario!");
+                alert.showAndWait();
+            }
+            uDao.fechaConnection();
+
+        } else if ("Salvar".equals(btSalvar.getText())) {
+
+            uDao.abreConnection();
+            if (uDao.atualizaUsuario(u)) {
+                System.out.println("Atualizado");
+                usuarios.set(index, new UsuarioTV(u));
+
+                alert.setTitle("Atualizar Usuario");
+                alert.setContentText("Usuario atualizado com sucesso!");
+                alert.showAndWait();
+
+            } else {
+                alert.setTitle("Cadastro de Usuario");
+                alert.setContentText("Falha ao atualizadar o usuario!");
+                alert.showAndWait();
+            }
+            uDao.fechaConnection();
+            novo();
         }
     }
-    
-    /**
-     * Método responsável por cuidar do estado do campo de senha, através do estado da checkbox administrador
-     * @param event 
-     */
-    @FXML
-    private void handleCheckboxIsAdministrador(ActionEvent event) {
-        BooleanProperty selecionado = isAdministrador.selectedProperty();
 
-        
+    private void clear() {
+        tfMatricula.setStyle(valida.normal);
+        tfNome.setStyle(valida.normal);
+        dpNasc.setStyle(valida.normalBorda);
+        tfObjetivo.setStyle(valida.normal);
+        dpCad.setStyle(valida.normalBorda);
+        pfSenha.setStyle(valida.normalBorda);
     }
-    
-    private void mostrarDadosUsuario (Usuario usuario) {
-        if (usuario != null) {
-            campoMatricula.setText(String.valueOf(usuario.getMatricula()));
-            campoNome.setText(usuario.getNome());
 
+    private void novo() {
+        
+        tfId.setText("");
+        index = -1;
+        tfMatricula.setText("");
+        tfNome.setText("");
+        dpNasc.setValue(null);
+        tfObjetivo.setText("");
+        tfObservacao.setText("");
+        dpCad.setValue(null);
+        cbAdministrador.setSelected(false);
+        pfSenha.setText("");
+        pfSenha.setDisable(true);
+        validaBotoesSalvar(true);
+        btSalvar.setText("Cadastrar");
+        tfMatricula.setEditable(true);
+        tvUsuario.getSelectionModel().clearSelection();
+        clear();
+    }
+
+    private void remover() {
+        uDao.abreConnection();
+        Usuario u = formToUsuario();
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Excluir Usuario");
+        alert.setHeaderText("O usuario " + u.getNome() + " será excluido permanentemente!");
+        alert.setContentText("Você tem certeza que deseja excluir o usuario?");
+        alert.showAndWait();
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            if (uDao.deletaUsuario(u)) {
+                System.out.println("Removido");
+                System.out.println("Removido: " + index);
+                usuarios.remove(index);
+                alert.setTitle("Excluir Usuario");
+                alert.setHeaderText(null);
+                alert.setContentText("Usuario excluido com sucesso!");
+                alert.showAndWait();
+            } else {
+                alert.setTitle("Excluir Usuario");
+                alert.setHeaderText(null);
+                alert.setContentText("Falha ao excluir o usuario!");
+                alert.showAndWait();
+            }
+        }
+        uDao.fechaConnection();
+        novo();
+    }
+
+    //Indicador Direito = 1
+    //Indicador Esquerdo = 2
+    private String cadDigital(int dedo) {
+        if (dedo == 1) {
+            return new LeitorBiometrico().capturar();
+        } else if (dedo == 2) {
+            return new LeitorBiometrico().capturar();
+        }
+        return null;
+    }
+
+    private void validaAdministrador() {
+        if (cbAdministrador.isSelected()) {
+            pfSenha.setDisable(false);
         } else {
-            campoMatricula.setText("");
-            campoNome.setText("");
+            pfSenha.setDisable(true);
         }
     }
 
+    private void validaBotoesSalvar(boolean b) {
+        btNovo.setDisable(b);
+        btRemover.setDisable(b);
+    }
+
+    private Usuario formToUsuario() {
+        Usuario usuario = new Usuario();
+        SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (tfId.getText() != null && !"".equals(tfId.getText())) {
+            usuario.setIdUsuario(Integer.valueOf(tfId.getText()));
+        }
+
+        usuario.setMatricula(Integer.valueOf(tfMatricula.getText()));
+        usuario.setNome(tfNome.getText());
+        try {
+            usuario.setDatanascimento(formatador.parse(dpNasc.getValue().toString()));
+            usuario.setDatacadastramento(formatador.parse(dpCad.getValue().toString()));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroUsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        usuario.setObjetivo(tfObjetivo.getText());
+        usuario.setObservacao(tfObservacao.getText());
+        usuario.setEadministrador(cbAdministrador.isSelected());
+        usuario.setSenha(pfSenha.getText());
+        usuario.setIndicadordireito(digDireito);
+        usuario.setIndicadoresquerdo(digEsquero);
+        clear();
+        return usuario;
+    }
+
+    private void usuarioToForm() {
+        Usuario usuario = tvUsuario.getSelectionModel().getSelectedItem().getUsuario();
+        index = tvUsuario.getSelectionModel().getSelectedIndex();
+        System.out.println(index);
+        Calendar cal = Calendar.getInstance();
+
+        tfId.setText(usuario.getIdUsuario() + "");
+
+        tfMatricula.setText(usuario.getMatricula() + "");
+        tfNome.setText(usuario.getNome() + "");
+
+        cal.setTime(usuario.getDatanascimento());
+        dpNasc.setValue(LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH)));
+
+        cal.setTime(usuario.getDatacadastramento());
+        dpCad.setValue(LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH)));
+
+        tfObjetivo.setText(usuario.getObjetivo() + "");
+        tfObservacao.setText(usuario.getObservacao() + "");
+
+        cbAdministrador.setSelected(usuario.getEadministrador());
+        if (usuario.getEadministrador()) {
+            pfSenha.setDisable(false);
+        } else {
+            pfSenha.setDisable(true);
+        }
+
+        pfSenha.setText(usuario.getSenha() + "");
+
+        validaBotoesSalvar(false);
+        btSalvar.setText("Salvar");
+        tfMatricula.setEditable(false);
+        clear();
+    }
+
+    private boolean validar() {
+        boolean resultado = true;
+
+        if (validar[0] == false) {
+            tfMatricula.setStyle(valida.vermelhoGradiente);
+            resultado = false;
+        }
+        if (validar[1] == false) {
+            tfNome.setStyle(valida.vermelhoGradiente);
+            resultado = false;
+        }
+
+        if (validar[2] == false) {
+            dpNasc.setStyle(valida.vermelhoGradiente);
+            dpNasc.setPromptText("");
+            resultado = false;
+        }
+
+        if (validar[3] == false) {
+            tfObjetivo.setStyle(valida.vermelhoGradiente);
+            resultado = false;
+        }
+
+        if (validar[4] == false) {
+            dpCad.setStyle(valida.vermelhoGradiente);
+            dpNasc.setPromptText("");
+            resultado = false;
+        }
+
+        if (validar[5] == false) {
+            if (cbAdministrador.isSelected()) {
+                dpCad.setStyle(valida.vermelhoGradiente);
+                dpNasc.setPromptText("");
+                resultado = false;
+            }
+        }
+
+        return resultado;
+    }
 }
