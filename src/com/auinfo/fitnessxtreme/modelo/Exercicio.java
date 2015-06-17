@@ -16,6 +16,7 @@ public class Exercicio {
     private int serie;
     private int quantidade;
     private int peso;
+    private Grupo grupo;
 
     public Exercicio() {
     }
@@ -67,6 +68,14 @@ public class Exercicio {
 
     public void setPeso(int peso) {
         this.peso = peso;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     @Override

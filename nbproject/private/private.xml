@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/BrunoRicardo/Documents/GitHub/Sistema-Gerenciador-de-Treinos-Fitness-X-Treme/src/com/auinfo/fitnessxtreme/controlador/MenuPrincipalControlador.java</file>
-            <file>file:/C:/Users/BrunoRicardo/Documents/GitHub/Sistema-Gerenciador-de-Treinos-Fitness-X-Treme/src/com/auinfo/fitnessxtreme/controlador/TelaBaseControlador.java</file>
-            <file>file:/C:/Users/BrunoRicardo/Documents/GitHub/Sistema-Gerenciador-de-Treinos-Fitness-X-Treme/src/com/auinfo/fitnessxtreme/controlador/Navegacao.java</file>
+            <file>file:/C:/Users/Atual/Documents/GitHub/Sistema-Gerenciador-de-Treinos-Fitness-X-Treme/src/com/auinfo/fitnessxtreme/controlador/CadastroUsuarioControlador.java</file>
+            <file>file:/C:/Users/Atual/Documents/GitHub/Sistema-Gerenciador-de-Treinos-Fitness-X-Treme/src/com/auinfo/fitnessxtreme/controlador/CadastroExercicioControlador.java</file>
         </group>
     </open-files>
 </project-private>
