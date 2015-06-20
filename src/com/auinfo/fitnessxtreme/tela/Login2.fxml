@@ -9,9 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="principal" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #fcfcfc;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.Login2Controlador">
+<AnchorPane fx:id="principal" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #fcfcfc;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.Login2Controlador">
    <children>
-      <ImageView fitWidth="1000.0" layoutX="131.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitWidth="1000.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
          <image>
             <Image url="@imagens/logo.png" />
          </image>

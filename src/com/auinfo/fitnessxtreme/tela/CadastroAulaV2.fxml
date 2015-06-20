@@ -11,9 +11,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="principal" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #fcfcfc;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.CadastroAulaV2Controlador">
+<AnchorPane fx:id="principal" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #fcfcfc;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.CadastroAulaV2Controlador">
    <children>
-      <Pane layoutX="20.0" layoutY="365.0" prefHeight="40.0" prefWidth="460.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="20.0">
+      <Pane layoutX="20.0" layoutY="343.0" prefHeight="40.0" prefWidth="460.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="20.0">
          <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" text="Nome Aula:">
                <font>
@@ -23,7 +23,7 @@
             <TextField fx:id="tfDescAula" layoutX="100.0" layoutY="5.0" prefHeight="31.0" prefWidth="350.0" />
          </children>
       </Pane>
-      <Pane layoutX="20.0" layoutY="404.0" prefHeight="40.0" prefWidth="297.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="20.0">
+      <Pane layoutX="20.0" layoutY="382.0" prefHeight="40.0" prefWidth="297.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="20.0">
          <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" text="Dia da Semana">
                <font>
@@ -99,7 +99,7 @@
             <TableColumn fx:id="tcPeso" prefWidth="120.0" text="Peso" />
         </columns>
       </TableView>
-           <Label layoutX="193.0" layoutY="479.0" text="TEMPO" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="193.0">
+           <Label layoutX="193.0" layoutY="437.0" text="TEMPO" AnchorPane.bottomAnchor="142.0" AnchorPane.leftAnchor="193.0">
                <font>
                    <Font name="System Bold" size="15.0" />
                </font>
@@ -170,7 +170,7 @@
             </Label>
                </children>
            </Pane>
-           <Pane layoutX="20.0" layoutY="326.0" prefHeight="40.0" prefWidth="460.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="20.0">
+           <Pane layoutX="20.0" layoutY="304.0" prefHeight="40.0" prefWidth="460.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="20.0">
                <children>
                    <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" text="Objetivo:">
                        <font>

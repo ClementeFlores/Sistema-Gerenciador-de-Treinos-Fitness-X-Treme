@@ -6,13 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #fcfcfc;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.MenuPrincipalControlador">
+<AnchorPane fx:id="principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #fcfcfc;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.MenuPrincipalControlador">
    <children>
       <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btElaborarTreinamento" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Elaborar Treinamento" />
-            <Button fx:id="btCadastroUsuario" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Cadastro Usuário" GridPane.columnIndex="1" />
-            <Button fx:id="btCadastroExercicio" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Cadastro Exercicio" GridPane.columnIndex="2" />
+            <Button fx:id="btCadastroUsuario" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Cadastrar Usuário" GridPane.columnIndex="1" />
+            <Button fx:id="btCadastroExercicio" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Cadastrar Exercicio" GridPane.columnIndex="2" />
             <Button fx:id="btConfiguracoes" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Configurações" GridPane.rowIndex="1" />
             <Button fx:id="btSobre" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Sobre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button fx:id="btSair" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Sair" GridPane.columnIndex="2" GridPane.rowIndex="1" />
