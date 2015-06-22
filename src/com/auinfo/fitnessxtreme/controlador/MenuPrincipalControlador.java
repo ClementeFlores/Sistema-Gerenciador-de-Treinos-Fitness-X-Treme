@@ -73,6 +73,7 @@ public class MenuPrincipalControlador implements Initializable {
         btCadastroUsuario.setOnAction(event -> nav.navega("CadastroUsuario"));
         btCadastroExercicio.setOnAction(event -> nav.navega("CadastroExercicio"));
         btElaborarTreinamento.setOnAction(event -> nav.navega("ConsultaSerie"));
+        btConfiguracoes.setOnAction(event -> nav.navega("Configuracoes"));
         btSobre.setOnAction(event -> nav.navega("Sobre"));
         btSair.setOnAction(event -> nav.navega("Login"));
     }

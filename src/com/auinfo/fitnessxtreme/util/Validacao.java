@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 public class Validacao {
 
     public String vermelhoGradiente = "-fx-background-color: red,linear-gradient(to bottom, derive(red,60%) 5%,derive(red,90%) 40%);";
-    public String normal = "-fx-background-color: white;";
+    public String normal = "-fx-background-color: white; -fx-border-color: rgb(181, 181, 181);";
     public String vermelhoBorda = "-fx-border-color: red;";
     public String normalBorda = "-fx-border-color: rgb(181, 181, 181);";
 

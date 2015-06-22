@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="principal" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.ConsultaAulaControlador">
+<AnchorPane id="AnchorPane" fx:id="principal" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.ConsultaAulaControlador">
    <children>
       <SplitPane dividerPositions="0.5601202404809619" layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -35,7 +36,14 @@
                         </Label>
                         <ComboBox fx:id="cbAulas" layoutX="14.0" layoutY="124.0" prefHeight="31.0" prefWidth="425.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="125.0" />
                         <Label layoutX="14.0" layoutY="101.0" text="Selecione a aula:" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                        <Button fx:id="btEditarAula" layoutX="440.0" layoutY="124.0" mnemonicParsing="false" prefWidth="31.0" text="e" AnchorPane.rightAnchor="85.0" />
+                        <Button fx:id="btEditarAula" layoutX="440.0" layoutY="124.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" AnchorPane.rightAnchor="85.0">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/botãoEditar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                         <Button fx:id="btNovaAula" layoutX="495.0" layoutY="124.0" mnemonicParsing="false" prefWidth="31.0" text="+" AnchorPane.rightAnchor="45.0" />
                         <Button fx:id="btRemoverAula" layoutX="510.0" layoutY="124.0" mnemonicParsing="false" prefWidth="31.0" text="-" AnchorPane.rightAnchor="5.0" />
                      </children>

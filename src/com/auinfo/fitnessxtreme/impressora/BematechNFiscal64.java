@@ -25,9 +25,9 @@ package com.auinfo.fitnessxtreme.impressora;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
-public interface BematechNFiscal extends Library {
-
-    public BematechNFiscal Instance = (BematechNFiscal) Native.loadLibrary("mp2064", BematechNFiscal.class);
+public interface BematechNFiscal64 extends Library {
+    
+    public BematechNFiscal64 Instance = (BematechNFiscal64) Native.loadLibrary("mp2064", BematechNFiscal64.class);
 
     public int IniciaPorta(String porta);
     public int FechaPorta();

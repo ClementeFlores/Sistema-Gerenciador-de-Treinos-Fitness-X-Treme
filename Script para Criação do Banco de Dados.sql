@@ -1,8 +1,16 @@
 CREATE SCHEMA IF NOT EXISTS FITNESSXTREME;
 
+CREATE TABLE Grupo (
+                idGrupo IDENTITY NOT NULL,
+                nomeGrupo VARCHAR(100) NOT NULL,                
+                CONSTRAINT idGrupo PRIMARY KEY (idGrupo)
+);
+
+
 CREATE TABLE Exercicio (
                 idExercicio IDENTITY NOT NULL,
                 nomeExercicio VARCHAR(100) NOT NULL,
+		idGrupo INTEGER NOT NULL,
                 CONSTRAINT idExercicio PRIMARY KEY (idExercicio)
 );
 
@@ -85,5 +93,11 @@ ON UPDATE CASCADE;
 ALTER TABLE AulaExercicio ADD CONSTRAINT Aula_ExercicioAula_fk
 FOREIGN KEY (idAula)
 REFERENCES Aula (idAula)
+ON DELETE NO ACTION
+ON UPDATE CASCADE;
+
+ALTER TABLE Exercicio ADD CONSTRAINT Grupo_Exercicio_fk
+FOREIGN KEY (idGrupo)
+REFERENCES Grupo (idGrupo)
 ON DELETE NO ACTION
 ON UPDATE CASCADE;

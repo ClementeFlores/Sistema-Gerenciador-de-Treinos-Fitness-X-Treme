@@ -7,9 +7,12 @@ package com.auinfo.fitnessxtreme.controlador;
 
 import com.auinfo.fitnessxtreme.biometria.LeitorBiometrico;
 import com.auinfo.fitnessxtreme.controlador.dao.UsuarioDao;
+import com.auinfo.fitnessxtreme.impressora.Impressora;
 import com.auinfo.fitnessxtreme.modelo.UsuarioTV;
 import com.auinfo.fitnessxtreme.modelo.Usuario;
+import static com.auinfo.fitnessxtreme.util.ManipulaConfigs.getProp;
 import com.auinfo.fitnessxtreme.util.Validacao;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +20,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,9 +108,12 @@ public class CadastroUsuarioControlador implements Initializable {
     @FXML
     private Button btEsquerdo;
 
+    Properties prop;
+    boolean verificaDigital;
+
     int index = -1;
 
-    String digDireito, digEsquero;
+    String digDireito = null, digEsquero = null;
 
     ObservableList<UsuarioTV> usuarios;
 
@@ -120,6 +127,14 @@ public class CadastroUsuarioControlador implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        try {
+            prop = getProp();
+        } catch (IOException ex) {
+            Logger.getLogger(CadastroUsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        verificaDigital = Boolean.parseBoolean(prop.getProperty("prop.biometria.digital"));
 
         AnchorPane.setTopAnchor(principal, 0d);
         AnchorPane.setRightAnchor(principal, 0d);
@@ -149,8 +164,8 @@ public class CadastroUsuarioControlador implements Initializable {
         btSalvar.setOnAction(event -> cadastrar());
         btNovo.setOnAction(event -> novo());
         btRemover.setOnAction(event -> remover());
-        btDireito.setOnAction(event -> digDireito = cadDigital(1));
-        btEsquerdo.setOnAction(event -> digEsquero = cadDigital(2));
+        btDireito.setOnAction(event -> digDireito = cadDigital());
+        btEsquerdo.setOnAction(event -> digEsquero = cadDigital());
         cbAdministrador.setOnAction(event -> validaAdministrador());
         tvUsuario.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -161,12 +176,12 @@ public class CadastroUsuarioControlador implements Initializable {
         //Key Released Event
         tfPesquisar.setOnKeyReleased(event -> pesquisar());
 
-        tfMatricula.setOnKeyReleased(event -> validar[0] = valida.validaNumero(tfMatricula,1));
-        tfNome.setOnKeyReleased(event -> validar[1] = valida.validaTexto(tfNome,10));
-        tfObjetivo.setOnKeyReleased(event -> validar[3] = valida.validaTexto(tfObjetivo,5));
+        tfMatricula.setOnKeyReleased(event -> validar[0] = valida.validaNumero(tfMatricula, 1));
+        tfNome.setOnKeyReleased(event -> validar[1] = valida.validaTexto(tfNome, 10));
+        tfObjetivo.setOnKeyReleased(event -> validar[3] = valida.validaTexto(tfObjetivo, 5));
         dpNasc.setOnAction(event -> validar[2] = valida.validaData(dpNasc));
         dpCad.setOnAction(event -> validar[4] = valida.validaData(dpCad));
-        pfSenha.setOnKeyReleased(event -> validar[5] = valida.validaPf(pfSenha,6));
+        pfSenha.setOnKeyReleased(event -> validar[5] = valida.validaPf(pfSenha, 6));
 
         filteredUsuarios.setPredicate(u -> true);
 
@@ -233,7 +248,7 @@ public class CadastroUsuarioControlador implements Initializable {
     }
 
     private void novo() {
-        
+
         tfId.setText("");
         index = -1;
         tfMatricula.setText("");
@@ -283,15 +298,53 @@ public class CadastroUsuarioControlador implements Initializable {
         novo();
     }
 
-    //Indicador Direito = 1
-    //Indicador Esquerdo = 2
-    private String cadDigital(int dedo) {
-        if (dedo == 1) {
-            return new LeitorBiometrico().capturar();
-        } else if (dedo == 2) {
-            return new LeitorBiometrico().capturar();
+    private String cadDigital() {
+        String lido = null;
+        String lido2 = null;
+        LeitorBiometrico biometria = new LeitorBiometrico();
+
+        lido = new LeitorBiometrico().capturar();
+        lido2 = new LeitorBiometrico().capturar();
+
+        if (verificaDigital) {
+            UsuarioDao uDao = new UsuarioDao();
+            Integer j = null;
+
+            uDao.abreConnection();
+            List<Usuario> listUsuario = uDao.getLista();
+            uDao.fechaConnection();
+
+            for (int i = 0; i < listUsuario.size(); i++) {
+
+                if (biometria.verificar(listUsuario.get(i).getIndicadordireito(), lido) || biometria.verificar(listUsuario.get(i).getIndicadoresquerdo(), lido)) {
+                    System.out.println("Encontrou");
+                    j = i;
+
+                    System.out.println("j= " + j);
+                    break;
+                }
+            }
+
+            if (j != null) {
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.setTitle("Sua digital foi encontrada em outro cadastro!");
+                alert.setHeaderText(null);
+                alert.setContentText("Essa digital foi encontradano cadastro do usuario: " + listUsuario.get(j).getNome());
+                alert.showAndWait();
+            }
         }
-        return null;
+
+        while (!biometria.verificar(lido, lido2)) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Digitais diferentes!");
+            alert.setHeaderText(null);
+            alert.setContentText("Falha ao capturar a digital, limpe o leitor e tente novamente!");
+            alert.showAndWait();
+            lido = new LeitorBiometrico().capturar();
+            lido2 = new LeitorBiometrico().capturar();
+        }
+
+        return lido;
     }
 
     private void validaAdministrador() {
@@ -320,8 +373,10 @@ public class CadastroUsuarioControlador implements Initializable {
         try {
             usuario.setDatanascimento(formatador.parse(dpNasc.getValue().toString()));
             usuario.setDatacadastramento(formatador.parse(dpCad.getValue().toString()));
+
         } catch (ParseException ex) {
-            Logger.getLogger(CadastroUsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroUsuarioControlador.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         usuario.setObjetivo(tfObjetivo.getText());
         usuario.setObservacao(tfObservacao.getText());
@@ -360,6 +415,9 @@ public class CadastroUsuarioControlador implements Initializable {
             pfSenha.setDisable(true);
         }
 
+        digDireito = usuario.getIndicadordireito();
+        digEsquero = usuario.getIndicadoresquerdo();
+
         pfSenha.setText(usuario.getSenha() + "");
 
         validaBotoesSalvar(false);
@@ -369,6 +427,14 @@ public class CadastroUsuarioControlador implements Initializable {
     }
 
     private boolean validar() {
+
+        validar[0] = valida.validaNumero(tfMatricula, 1);
+        validar[1] = valida.validaTexto(tfNome, 10);
+        validar[2] = valida.validaData(dpNasc);
+        validar[3] = valida.validaTexto(tfObjetivo, 5);
+        validar[4] = valida.validaData(dpCad);
+        validar[5] = valida.validaPf(pfSenha, 6);
+
         boolean resultado = true;
 
         if (validar[0] == false) {

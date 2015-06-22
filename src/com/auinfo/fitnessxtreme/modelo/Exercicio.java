@@ -16,7 +16,7 @@ public class Exercicio {
     private int serie;
     private int quantidade;
     private int peso;
-    private Grupo grupo;
+    private Grupo grupo = new Grupo();
 
     public Exercicio() {
     }

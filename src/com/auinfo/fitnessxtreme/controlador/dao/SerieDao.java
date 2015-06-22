@@ -140,7 +140,7 @@ public class SerieDao {
 
 //UPDATE
     public boolean atualizaSerie(Serie novaSerie) {
-        String sql = "UPDATE FITNESSXTREME.Serie SET dataInicio=?, dataFim=?, peso1=?, peso2=?, peso3=?, idUsuario=?, nomeSerie=?, descSerie  WHERE idSerie=?";
+        String sql = "UPDATE FITNESSXTREME.Serie SET dataInicio=?, dataFim=?, peso1=?, peso2=?, peso3=?, idUsuario=?, nomeSerie=?, descSerie=?  WHERE idSerie=?";
         PreparedStatement stmt;
         boolean resultado = false;
 

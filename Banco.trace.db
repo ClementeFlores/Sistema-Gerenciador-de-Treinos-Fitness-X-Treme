@@ -765,3 +765,71 @@ org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
 org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
 06-07 19:24:12 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+06-19 12:57:33 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Column count does not match; SQL statement:
+INSERT INTO BANCO.FITNESSXTREME.EXERCICIO (NOMEEXERCICIO) 
+	VALUES ('Supino',1) [21002-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.command.dml.Insert.prepare(Insert.java:266)
+	at org.h2.command.Parser.prepareCommand(Parser.java:248)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.executeSQLStatement(SQLExecutionHelper.java:869)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.access$500(SQLExecutionHelper.java:84)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper$1Loader.run(SQLExecutionHelper.java:145)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1423)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2033)
+06-19 13:11:02 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Column "Supino Inclinado" not found; SQL statement:
+INSERT INTO BANCO.FITNESSXTREME.EXERCICIO (NOMEEXERCICIO, IDGRUPO) 
+	
+ VALUES ("Supino Inclinado",1),
+        ("Supino Declinado",1),
+        ("Voador",1),
+        ("Crucifixo",1),
+        ("Crucifixo Inclinado",1),
+        ("Cross Over",1) [42122-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:148)
+	at org.h2.command.dml.Insert.prepare(Insert.java:271)
+	at org.h2.command.Parser.prepareCommand(Parser.java:248)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.executeSQLStatement(SQLExecutionHelper.java:869)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.access$500(SQLExecutionHelper.java:84)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper$1Loader.run(SQLExecutionHelper.java:145)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1423)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2033)
+06-19 13:35:08 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+06-19 13:35:08 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+06-19 13:35:08 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+06-19 21:22:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+06-19 21:22:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+06-19 21:22:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+06-19 23:43:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+06-19 23:43:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+06-19 23:43:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]

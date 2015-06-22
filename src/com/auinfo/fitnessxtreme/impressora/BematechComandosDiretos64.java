@@ -22,7 +22,7 @@ package com.auinfo.fitnessxtreme.impressora;
  *
  * @author Tiago
  */
-public class BematechComandosDiretos {
+public class BematechComandosDiretos64 {
 
     //Códigos para Funções Diretas
     public static final char ESC = 27; //escape   
@@ -66,39 +66,39 @@ public class BematechComandosDiretos {
     public static final String ITALICO_OFF = "" + ESC + ITALIC_OFF;
     public static final String INICIALIZA = "" + ESC + AT; //Reinicia todas as configurações da impressora
 
-    public static int inicializaImpressora(BematechNFiscal cupom) {
+    public static int inicializaImpressora(BematechNFiscal64 cupom) {
         return cupom.ComandoTX(INICIALIZA, INICIALIZA.length());
     }
 
-    public static int alinhaTexto(BematechNFiscal cupom, int posicao) {
+    public static int alinhaTexto(BematechNFiscal64 cupom, int posicao) {
         String iComando = "" + ESC + a + (char) posicao;
         return cupom.ComandoTX(iComando, iComando.length());
     }
 
-    public static int ativaExpandidoHorizontal(BematechNFiscal cupom) {
+    public static int ativaExpandidoHorizontal(BematechNFiscal64 cupom) {
         String iComando = "" + ESC + SO;
         return cupom.ComandoTX(iComando, iComando.length());
     }
 
-    public static int desativaExpandidoHorizontal(BematechNFiscal cupom) {
+    public static int desativaExpandidoHorizontal(BematechNFiscal64 cupom) {
         String iComando = "" + DC4;
         return cupom.ComandoTX(iComando, iComando.length());
     }
 
-    public static int ativaNegrito(BematechNFiscal cupom) {
+    public static int ativaNegrito(BematechNFiscal64 cupom) {
         return cupom.ComandoTX(NEGRITO_ON, NEGRITO_ON.length());
     }
 
-    public static int desativaNegrito(BematechNFiscal cupom) {
+    public static int desativaNegrito(BematechNFiscal64 cupom) {
         return cupom.ComandoTX(NEGRITO_OFF, NEGRITO_OFF.length());
     }
 
-    public static int pulaLinha(BematechNFiscal cupom) {
+    public static int pulaLinha(BematechNFiscal64 cupom) {
         String iComando = "" + LF;
         return cupom.ComandoTX(iComando, iComando.length());
     }
 
-    public static int avancoCaracteres(BematechNFiscal cupom, int caracteres) {
+    public static int avancoCaracteres(BematechNFiscal64 cupom, int caracteres) {
         String iComando = "" + ESC + f + AVANC + (char) caracteres;
         return cupom.ComandoTX(iComando, iComando.length());
     }

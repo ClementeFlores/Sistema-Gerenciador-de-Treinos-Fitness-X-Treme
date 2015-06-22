@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -57,10 +58,17 @@
                                     </Label>
                                     <TextField fx:id="tfNomeExercicio" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <ComboBox fx:id="cbGrupo" prefHeight="25.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Button fx:id="btEditarGrupo" mnemonicParsing="false" prefWidth="31.0" text="e" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                    <Button fx:id="btEditarGrupo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets right="35.0" />
                                        </GridPane.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@imagens/botãoEditar.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Button>
                                     <Button fx:id="btRemoverGrupoE" mnemonicParsing="false" prefWidth="31.0" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                                        <GridPane.margin>
@@ -86,18 +94,16 @@
                               <GridPane layoutX="5.0" layoutY="213.0" prefHeight="47.0" prefWidth="426.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                 <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="btNovoExercicio" mnemonicParsing="false" prefWidth="70.0" text="Novo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                    <Button fx:id="btRemoverExercicio" mnemonicParsing="false" prefWidth="70.0" text="Remover" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                    <Button fx:id="btCadastrarExercicio" mnemonicParsing="false" prefWidth="70.0" text="Cadastrar" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Button fx:id="btNovoExercicio" mnemonicParsing="false" prefWidth="90.0" text="Novo" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Button fx:id="btRemoverExercicio" mnemonicParsing="false" prefWidth="90.0" text="Remover" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Button fx:id="btCadastrarExercicio" mnemonicParsing="false" prefWidth="90.0" text="Cadastrar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                  </children>
                               </GridPane>
                            </children>
@@ -136,15 +142,13 @@
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Button fx:id="btNovoGrupo" mnemonicParsing="false" prefWidth="70.0" text="Novo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                    <Button fx:id="btCadastrarGrupo" mnemonicParsing="false" prefWidth="70.0" text="Cadastrar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Button fx:id="btNovoGrupo" mnemonicParsing="false" prefWidth="90.0" text="Novo" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Button fx:id="btCadastrarGrupo" mnemonicParsing="false" prefWidth="90.0" text="Cadastrar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                  </children>
                               </GridPane>
                            </children>

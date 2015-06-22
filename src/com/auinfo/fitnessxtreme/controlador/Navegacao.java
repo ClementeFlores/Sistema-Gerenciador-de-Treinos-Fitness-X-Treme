@@ -27,6 +27,13 @@ public class Navegacao {
                     TelaBaseControlador.CONTEUDO.getChildren().clear();
                     TelaBaseControlador.CONTEUDO.getChildren().add(root);
                     break;
+                case "CadastroExercicio":
+                    validaPainelInferior();
+                    System.out.println("CadastroExercicio");
+                    root = FXMLLoader.load(getClass().getResource("/com/auinfo/fitnessxtreme/tela/CadastroExercicio.fxml"));
+                    TelaBaseControlador.CONTEUDO.getChildren().clear();
+                    TelaBaseControlador.CONTEUDO.getChildren().add(root);
+                    break;
                 case "CadastroAula":
                     System.out.println("CadastroAula");
                     TelaBaseControlador.BORDERPANE.setBottom(null);
@@ -71,6 +78,7 @@ public class Navegacao {
                     TelaBaseControlador.CONTEUDO.getChildren().add(root);
                     break;
                 case "Sobre":
+                    TelaBaseControlador.BORDERPANE.setTop(null);
                     validaPainelInferior();
                     System.out.println("Sobre");
                     root = FXMLLoader.load(getClass().getResource("/com/auinfo/fitnessxtreme/tela/Sobre.fxml"));
@@ -84,6 +92,13 @@ public class Navegacao {
                     TelaBaseControlador.CONTEUDO.getChildren().clear();
                     TelaBaseControlador.CONTEUDO.getChildren().add(root);
                     break;
+                case "Configuracoes":
+                    validaPainelInferior();
+                    System.out.println("Configuracoes");
+                    root = FXMLLoader.load(getClass().getResource("/com/auinfo/fitnessxtreme/tela/Configuracao.fxml"));
+                    TelaBaseControlador.CONTEUDO.getChildren().clear();
+                    TelaBaseControlador.CONTEUDO.getChildren().add(root);
+                    break;
             }
 
         } catch (IOException ex) {
@@ -92,6 +107,6 @@ public class Navegacao {
     }
 
     private void validaPainelInferior() {
-            TelaBaseControlador.BORDERPANE.setBottom(TelaBaseControlador.getBottom());
+        TelaBaseControlador.BORDERPANE.setBottom(TelaBaseControlador.getBottom());
     }
 }

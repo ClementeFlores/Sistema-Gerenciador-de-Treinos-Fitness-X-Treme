@@ -166,6 +166,29 @@ public class AulaDao {
         }
         return listaResAula;
     }
+    
+    public boolean getLista(Exercicio exercicio) {
+        String sql = "SELECT * FROM FITNESSXTREME.AulaExercicio WHERE idExercicio=?";
+        PreparedStatement stmt;
+        ResultSet res;
+        boolean resultado = false;
+        
+        try {
+            stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, exercicio.getIdExercicio());
+            res = stmt.executeQuery();
+
+            if (res.next()) {
+                resultado = true;
+            }
+
+            res.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
+    }
 
 //UPDATE
     public boolean atualizaAula(Aula novoAula) {

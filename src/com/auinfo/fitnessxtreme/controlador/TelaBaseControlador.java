@@ -95,7 +95,7 @@ public class TelaBaseControlador implements Initializable {
                 if (u.getEadministrador()) {
                     entrarMenu();
                 } else {
-                    new Impressora().geraCupom(u);
+                    new Impressora(u);
                     nav.navega("Login");
                 }
                 break;

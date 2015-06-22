@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -10,12 +12,72 @@
    <children>
       <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btElaborarTreinamento" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Elaborar Treinamento" />
-            <Button fx:id="btCadastroUsuario" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Cadastrar Usuário" GridPane.columnIndex="1" />
-            <Button fx:id="btCadastroExercicio" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Cadastrar Exercicio" GridPane.columnIndex="2" />
-            <Button fx:id="btConfiguracoes" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Configurações" GridPane.rowIndex="1" />
-            <Button fx:id="btSobre" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Sobre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="btSair" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Sair" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="btElaborarTreinamento" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Elaborar Treinamento">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/elaborarTreinamento.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.5" />
+               </font></Button>
+            <Button fx:id="btCadastroUsuario" contentDisplay="TOP" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Cadastrar Usuário" GridPane.columnIndex="1">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/cadastraruUsuario.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Button fx:id="btCadastroExercicio" contentDisplay="TOP" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Cadastrar Exercicio" GridPane.columnIndex="2">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/cadastrarExercicio.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Button fx:id="btConfiguracoes" contentDisplay="TOP" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Configurações" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Button fx:id="btSobre" contentDisplay="TOP" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Sobre" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/sobre.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Button fx:id="btSair" contentDisplay="TOP" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Sair" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/saida.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
          </children>
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

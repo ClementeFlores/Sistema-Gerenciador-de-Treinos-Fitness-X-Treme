@@ -30,5 +30,9 @@ public class Grupo {
         this.nomeGrupo = nomeGrupo;
     }
     
+    @Override
+    public String toString(){
+        return nomeGrupo;
+    }
     
 }

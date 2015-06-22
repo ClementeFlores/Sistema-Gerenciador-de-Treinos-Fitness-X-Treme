@@ -64,32 +64,22 @@
                </children>
            </Pane>
       <ComboBox fx:id="cbExercicios" editable="true" layoutX="566.0" layoutY="206.0" prefHeight="31.0" prefWidth="364.0" promptText="Selecione o exercicio" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="100.0" />
-      <Button fx:id="btAdicionar" alignment="CENTER" contentDisplay="CENTER" layoutX="871.0" layoutY="206.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" style="-fx-background-radius: 50;" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="99.0">
-         <graphic>
-            <ImageView fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imagens/+.png" />
-               </image>
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-            </ImageView>
-         </graphic>
+      <Button fx:id="btAdicionar" alignment="CENTER" contentDisplay="CENTER" layoutX="871.0" layoutY="206.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" text="+" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="99.0">
          <padding>
             <Insets top="-1.0" />
          </padding></Button>
-      <Button fx:id="btRemover" layoutX="910.0" layoutY="206.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" style="-fx-background-radius: 50;" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="99.0">
+      <Button fx:id="btRemover" layoutX="910.0" layoutY="206.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" text="-" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="99.0">
          <padding>
             <Insets top="-1.0" />
-         </padding>
+         </padding></Button>
+      <Button fx:id="btEditar" layoutX="949.0" layoutY="206.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="99.0">
          <graphic>
-            <ImageView fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@imagens/-.png" />
+                  <Image url="@imagens/botãoEditar.png" />
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="btEditar" layoutX="949.0" layoutY="206.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" text="e" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="99.0" />
         <Button fx:id="btCancelar" alignment="CENTER" contentDisplay="CENTER" layoutX="808.0" layoutY="655.0" mnemonicParsing="false" text="Cancelar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="115.0" />
         <Button fx:id="btCadastrar" alignment="CENTER" contentDisplay="CENTER" layoutX="900.0" layoutY="655.0" mnemonicParsing="false" text="Cadastrar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
       <TableView fx:id="tvExercicios" layoutX="500.0" layoutY="159.0" prefHeight="371.0" prefWidth="480.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="159.0">

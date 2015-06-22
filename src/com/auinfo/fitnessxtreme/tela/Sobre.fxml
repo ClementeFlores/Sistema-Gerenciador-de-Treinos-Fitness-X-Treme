@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="principal" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.SobreControlador" />
+
+<AnchorPane id="AnchorPane" fx:id="principal" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #fcfcfc;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.SobreControlador">
+   <children>
+      <ImageView fitWidth="1000.0" layoutX="322.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <image>
+            <Image url="@imagens/telaSobre.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

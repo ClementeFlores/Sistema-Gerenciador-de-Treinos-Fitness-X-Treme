@@ -272,9 +272,13 @@ public class ConsultaSeriesControlador implements Initializable {
 
     private void cadastrar() {
 
+        System.out.println("chegou aqui..... ");
+
         if (!validar()) {
             return;
         }
+
+        System.out.println("chegou aqui.validacao ");
 
         if (validaCb() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -287,6 +291,8 @@ public class ConsultaSeriesControlador implements Initializable {
         Serie s = formToSerie();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
+
+        System.out.println("chegou aqui..... ");
 
         if ("Cadastrar".equals(btSalvar.getText())) {
             sDao.abreConnection();
@@ -306,6 +312,7 @@ public class ConsultaSeriesControlador implements Initializable {
             sDao.fechaConnection();
             novo();
         } else if ("Salvar".equals(btSalvar.getText())) {
+            System.out.println("Clicou no Salvar");
             sDao.abreConnection();
             if (sDao.atualizaSerie(s)) {
                 System.out.println("Atualizado");
@@ -418,29 +425,39 @@ public class ConsultaSeriesControlador implements Initializable {
     }
 
     private boolean validar() {
+        validar[0] = valida.validaTexto(tfNome, 5);
+        validar[1] = valida.validaTexto(tfDesc, 0);
+        validar[2] = valida.validaData(dpInicio);
+        validar[3] = valida.validaData(dpFim);
+
         boolean resultado = true;
 
         if (validar[0] == false) {
             tfNome.setStyle(valida.vermelhoGradiente);
             resultado = false;
         }
+        System.out.println("Nome");
+        System.out.println(resultado);
         if (validar[1] == false) {
             tfDesc.setStyle(valida.vermelhoGradiente);
             resultado = false;
         }
-
+        System.out.println("DESC");
+        System.out.println(resultado);
         if (validar[2] == false) {
             dpInicio.setStyle(valida.vermelhoGradiente);
             dpInicio.setPromptText("");
             resultado = false;
         }
-
+        System.out.println("DP Inicio");
+        System.out.println(resultado);
         if (validar[3] == false) {
             dpFim.setStyle(valida.vermelhoGradiente);
             dpFim.setPromptText("");
             resultado = false;
         }
-
+        System.out.println("DP Fim");
+        System.out.println(resultado);
         if (!tfPeso1.getText().isEmpty()) {
             Double test = null;
             test = Double.parseDouble(tfPeso1.getText());
@@ -448,10 +465,12 @@ public class ConsultaSeriesControlador implements Initializable {
                 tfPeso1.setStyle(valida.normal);
             } else {
                 tfPeso1.setStyle(valida.vermelhoGradiente);
+                resultado = false;
             }
-            resultado = false;
+            
         }
-
+        System.out.println("Peso1");
+        System.out.println(resultado);
         if (!tfPeso2.getText().isEmpty()) {
             Double test = null;
             test = Double.parseDouble(tfPeso2.getText());
@@ -459,10 +478,11 @@ public class ConsultaSeriesControlador implements Initializable {
                 tfPeso2.setStyle(valida.normal);
             } else {
                 tfPeso2.setStyle(valida.vermelhoGradiente);
+                resultado = false;
             }
-            resultado = false;
         }
-
+        System.out.println("Peso2");
+        System.out.println(resultado);
         if (!tfPeso3.getText().isEmpty()) {
             Double test = null;
             test = Double.parseDouble(tfPeso3.getText());
@@ -470,9 +490,12 @@ public class ConsultaSeriesControlador implements Initializable {
                 tfPeso3.setStyle(valida.normal);
             } else {
                 tfPeso3.setStyle(valida.vermelhoGradiente);
+                resultado = false;
             }
-            resultado = false;
+            
         }
+        System.out.println("Peso3");
+        System.out.println(resultado);
 
         return resultado;
 

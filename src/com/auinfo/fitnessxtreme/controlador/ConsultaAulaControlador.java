@@ -180,7 +180,7 @@ public class ConsultaAulaControlador implements Initializable {
             lbQtdImpressao.setText(aula.getImpresso() + "");
 
             eDao.abreConnection();
-            List<Exercicio> listaExercicio = eDao.getLista(aula.getIdAula());
+            List<Exercicio> listaExercicio = eDao.getLista(aula.getIdAula(), true);
             eDao.fechaConnection();
 
             exercicios = FXCollections.observableArrayList();
@@ -237,7 +237,7 @@ public class ConsultaAulaControlador implements Initializable {
 
         if (aula != null) {
             eDao.abreConnection();
-            aula.setExercicioList(eDao.getLista(aula.getIdAula()));
+            aula.setExercicioList(eDao.getLista(aula.getIdAula(), true));
             eDao.fechaConnection();
             CadastroAulaV2Controlador.AULA = aula;
             nav.navega("CadastroAula");
