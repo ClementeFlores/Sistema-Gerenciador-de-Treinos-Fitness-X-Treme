@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="principal" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.ImprimirAulaControlador">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="5.0" text="Impressão de Aula" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tvExercicios" layoutX="515.0" layoutY="164.0" prefHeight="339.0" prefWidth="480.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="200.0">
+         <columns>
+            <TableColumn fx:id="tcExercicio" prefWidth="253.0" text="Exercicio" />
+            <TableColumn fx:id="tcSerie" minWidth="0.0" prefWidth="132.0" text="Serie" />
+            <TableColumn fx:id="tcPeso" minWidth="3.0" prefWidth="94.0" text="Peso" />
+         </columns>
+      </TableView>
+      <Label fx:id="lbCliente" layoutX="5.0" layoutY="59.0" text="Cliente" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbSeries" layoutX="10.0" layoutY="115.0" prefHeight="31.0" prefWidth="480.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="505.0" />
+      <Label layoutX="10.0" layoutY="92.0" text="Selecione a Série:" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="10.0" />
+      <TableView fx:id="tvAulas" layoutX="18.0" layoutY="164.0" prefHeight="350.0" prefWidth="480.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="505.0" AnchorPane.topAnchor="200.0">
+         <columns>
+            <TableColumn fx:id="tcNome" prefWidth="479.0" text="Aula" />
+         </columns>
+      </TableView>
+      <Label layoutX="174.0" layoutY="160.0" text="Lista de Aulas" AnchorPane.leftAnchor="174.0">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="644.0" layoutY="160.0" text="Lista de Exercicios" AnchorPane.rightAnchor="144.0">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="27.0" layoutY="530.0" prefHeight="47.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btImprimir" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Imprimir" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btVoltar" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Voltar" GridPane.halignment="LEFT">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

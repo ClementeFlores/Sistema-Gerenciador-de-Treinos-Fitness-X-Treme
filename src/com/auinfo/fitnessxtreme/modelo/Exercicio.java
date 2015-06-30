@@ -13,8 +13,7 @@ public class Exercicio {
 
     private int idExercicio;
     private String nomeExercicio;
-    private int serie;
-    private int quantidade;
+    private String serie;
     private int peso;
     private Grupo grupo = new Grupo();
 
@@ -46,20 +45,12 @@ public class Exercicio {
         this.nomeExercicio = nomeexercicio;
     }
 
-    public int getSerie() {
+    public String getSerie() {
         return serie;
     }
 
-    public void setSerie(int serie) {
+    public void setSerie(String serie) {
         this.serie = serie;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
     }
 
     public int getPeso() {

@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -34,6 +35,12 @@ public class LoginControlador implements Initializable {
         AnchorPane.setBottomAnchor(principal, 0d);
         
         btLogar.setOnAction(event -> new TelaBaseControlador().logar());
+        
+        btLogar.setOnKeyPressed( event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                new TelaBaseControlador().logar();
+            }
+        });
         
         btLogar.requestFocus();
         

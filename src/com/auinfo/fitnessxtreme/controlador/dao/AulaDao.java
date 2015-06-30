@@ -73,7 +73,7 @@ public class AulaDao {
     }
 
     public boolean adicionaAulaExercicios(Aula novaAula) {
-        String sql = "INSERT INTO FITNESSXTREME.AulaExercicio(idAula, idExercicio, serie, quantidade, peso) values(?,?,?,?,?)";
+        String sql = "INSERT INTO FITNESSXTREME.AulaExercicio(idAula, idExercicio, serie, peso) values(?,?,?,?)";
         PreparedStatement stmt;
         boolean resultado = true;
 
@@ -84,9 +84,8 @@ public class AulaDao {
                 stmt = conexao.prepareStatement(sql);
                 stmt.setInt(1, novaAula.getIdAula());
                 stmt.setInt(2, e.getIdExercicio());
-                stmt.setInt(3, e.getSerie());
-                stmt.setInt(4, e.getQuantidade());
-                stmt.setInt(5, e.getPeso());
+                stmt.setString(3, e.getSerie());
+                stmt.setInt(4, e.getPeso());
                 stmt.execute();
                 stmt.close();
                 
@@ -95,7 +94,7 @@ public class AulaDao {
                 resultado = false;
             }
             System.out.println("Exercicio ID: " + e.getIdExercicio());
-            System.out.println("Serie: " + e.getSerie() + "x" + e.getQuantidade());
+            System.out.println("Serie: " + e.getSerie());
             System.out.println("Peso: " + e.getPeso());
             System.out.println("Aula ID: " + novaAula.getIdAula());
             System.out.println("");

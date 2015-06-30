@@ -117,4 +117,9 @@ public class Serie {
     public void setDescSerie(String descSerie) {
         this.descSerie = descSerie;
     }
+    
+    @Override
+    public String toString(){
+        return nomeSerie;
+    }
 }

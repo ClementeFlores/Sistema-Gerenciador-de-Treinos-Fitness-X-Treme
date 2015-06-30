@@ -1,13 +1,14 @@
 CREATE SCHEMA IF NOT EXISTS FITNESSXTREME;
 
-CREATE TABLE Grupo (
+CREATE TABLE FITNESSXTREME.Grupo (
                 idGrupo IDENTITY NOT NULL,
                 nomeGrupo VARCHAR(100) NOT NULL,                
+				ordem INTEGER NOT NULL AUTO_INCREMENT,
                 CONSTRAINT idGrupo PRIMARY KEY (idGrupo)
 );
 
 
-CREATE TABLE Exercicio (
+CREATE TABLE FITNESSXTREME.Exercicio (
                 idExercicio IDENTITY NOT NULL,
                 nomeExercicio VARCHAR(100) NOT NULL,
 		idGrupo INTEGER NOT NULL,
@@ -15,7 +16,7 @@ CREATE TABLE Exercicio (
 );
 
 
-CREATE TABLE Usuario (
+CREATE TABLE FITNESSXTREME.Usuario (
                 idUsuario IDENTITY NOT NULL,
                 matricula INTEGER NOT NULL,
 				dataNascimento DATE NOT NULL,
@@ -32,10 +33,10 @@ CREATE TABLE Usuario (
 
 
 CREATE UNIQUE INDEX matricula
- ON Usuario
+ ON FITNESSXTREME.Usuario
  ( matricula ASC );
 
-CREATE TABLE Serie (
+CREATE TABLE FITNESSXTREME.Serie (
                 idSerie IDENTITY NOT NULL,
                 dataInicio DATE NOT NULL,
                 dataFim DATE NOT NULL,
@@ -49,7 +50,7 @@ CREATE TABLE Serie (
 );
 
 
-CREATE TABLE Aula (
+CREATE TABLE FITNESSXTREME.Aula (
                 idAula IDENTITY NOT NULL,
                 descAula VARCHAR(100) NOT NULL,                
                 repetir VARCHAR(20) NOT NULL,
@@ -62,7 +63,7 @@ CREATE TABLE Aula (
 );
 
 
-CREATE TABLE AulaExercicio (
+CREATE TABLE FITNESSXTREME.AulaExercicio (
                 idAula INTEGER NOT NULL,
                 idExercicio INTEGER NOT NULL,
 				serie INTEGER NOT NULL,
@@ -72,32 +73,32 @@ CREATE TABLE AulaExercicio (
 );
 
 
-ALTER TABLE AulaExercicio ADD CONSTRAINT Exercicio_ExercicioAula_fk
+ALTER TABLE FITNESSXTREME.AulaExercicio ADD CONSTRAINT Exercicio_ExercicioAula_fk
 FOREIGN KEY (idExercicio)
-REFERENCES Exercicio (idExercicio)
+REFERENCES FITNESSXTREME.Exercicio (idExercicio)
 ON DELETE NO ACTION
 ON UPDATE CASCADE;
 
-ALTER TABLE Serie ADD CONSTRAINT Usuario_Serie_fk
+ALTER TABLE FITNESSXTREME.Serie ADD CONSTRAINT Usuario_Serie_fk
 FOREIGN KEY (idUsuario)
-REFERENCES Usuario (idUsuario)
+REFERENCES FITNESSXTREME.Usuario (idUsuario)
 ON DELETE NO ACTION
 ON UPDATE CASCADE;
 
-ALTER TABLE Aula ADD CONSTRAINT Serie_Aula_fk
+ALTER TABLE FITNESSXTREME.Aula ADD CONSTRAINT Serie_Aula_fk
 FOREIGN KEY (idSerie)
-REFERENCES Serie (idSerie)
+REFERENCES FITNESSXTREME.Serie (idSerie)
 ON DELETE NO ACTION
 ON UPDATE CASCADE;
 
-ALTER TABLE AulaExercicio ADD CONSTRAINT Aula_ExercicioAula_fk
+ALTER TABLE FITNESSXTREME.AulaExercicio ADD CONSTRAINT Aula_ExercicioAula_fk
 FOREIGN KEY (idAula)
-REFERENCES Aula (idAula)
+REFERENCES FITNESSXTREME.Aula (idAula)
 ON DELETE NO ACTION
 ON UPDATE CASCADE;
 
-ALTER TABLE Exercicio ADD CONSTRAINT Grupo_Exercicio_fk
+ALTER TABLE FITNESSXTREME.Exercicio ADD CONSTRAINT Grupo_Exercicio_fk
 FOREIGN KEY (idGrupo)
-REFERENCES Grupo (idGrupo)
+REFERENCES FITNESSXTREME.Grupo (idGrupo)
 ON DELETE NO ACTION
 ON UPDATE CASCADE;

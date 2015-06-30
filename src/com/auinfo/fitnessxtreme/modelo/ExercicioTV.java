@@ -16,8 +16,8 @@ import javafx.beans.property.StringProperty;
  */
 public class ExercicioTV {
     
-    IntegerProperty idExercicio, serie, quantidade, peso;
-    StringProperty nomeExercicio, serieCompleta;
+    IntegerProperty idExercicio, peso;
+    StringProperty nomeExercicio, serie;
     
     Exercicio exercicio;
     
@@ -27,11 +27,8 @@ public class ExercicioTV {
         idExercicio = new SimpleIntegerProperty();
         idExercicio.set(exercicio.getIdExercicio());
         
-        serie = new SimpleIntegerProperty();
+        serie = new SimpleStringProperty();
         serie.set(exercicio.getSerie());
-        
-        quantidade = new SimpleIntegerProperty();
-        quantidade.set(exercicio.getQuantidade());
         
         peso = new SimpleIntegerProperty();
         peso.set(exercicio.getPeso());
@@ -39,25 +36,18 @@ public class ExercicioTV {
         nomeExercicio = new SimpleStringProperty();
         nomeExercicio.set(exercicio.getNomeExercicio());
         
-        serieCompleta = new SimpleStringProperty();
-        serieCompleta.set(exercicio.getSerie() + " x " + exercicio.getQuantidade());
-        
     }
 
     public IntegerProperty idExercicioProperty() {
         return idExercicio;
     }
 
-    public StringProperty serieCompletaProperty() {
-        return serieCompleta;
-    }
-
-    public IntegerProperty quantidadeProperty() {
-        return quantidade;
-    }
-
     public IntegerProperty pesoProperty() {
         return peso;
+    }
+    
+    public StringProperty serieProperty() {
+        return serie;
     }
 
     public StringProperty nomeExercicioProperty() {

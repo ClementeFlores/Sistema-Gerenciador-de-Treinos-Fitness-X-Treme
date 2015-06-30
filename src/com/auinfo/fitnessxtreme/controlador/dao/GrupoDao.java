@@ -79,6 +79,7 @@ public class GrupoDao {
                 Grupo grupo = new Grupo();
                 grupo.setIdGrupo(res.getInt("idGrupo"));
                 grupo.setNomeGrupo(res.getString("nomeGrupo"));
+                grupo.setOrdem(res.getInt("ordem"));
                 listaResGrupo.add(grupo);
             }
             res.close();

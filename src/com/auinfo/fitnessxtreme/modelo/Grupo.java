@@ -13,6 +13,7 @@ public class Grupo {
 
     private int idGrupo;
     private String nomeGrupo;
+    private int ordem;
 
     public int getIdGrupo() {
         return idGrupo;
@@ -29,10 +30,18 @@ public class Grupo {
     public void setNomeGrupo(String nomeGrupo) {
         this.nomeGrupo = nomeGrupo;
     }
-    
+
+    public int getOrdem() {
+        return ordem;
+    }
+
+    public void setOrdem(int ordem) {
+        this.ordem = ordem;
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         return nomeGrupo;
     }
-    
+
 }

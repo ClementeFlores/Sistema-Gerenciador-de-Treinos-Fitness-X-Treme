@@ -67,7 +67,7 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Button>
-            <Button fx:id="btSair" contentDisplay="TOP" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Sair" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="btSair" contentDisplay="TOP" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Deslogar" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>

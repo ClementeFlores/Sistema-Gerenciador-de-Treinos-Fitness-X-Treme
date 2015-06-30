@@ -94,8 +94,8 @@ public class ExercicioDao {
     }
 
     public List<Exercicio> getLista(int idAula, boolean controle) {
-        String sql = "SELECT e.idExercicio, e.nomeExercicio, e.idGrupo, g.nomeGrupo, ae.serie, ae.quantidade, ae.peso FROM FITNESSXTREME.Exercicio AS e JOIN FITNESSXTREME.AulaExercicio AS ae ON e.idExercicio = ae.idExercicio JOIN FITNESSXTREME.Aula AS a ON ae.idAula = a.idAula JOIN FITNESSXTREME.Grupo AS g ON e.idGrupo = g.idGrupo WHERE a.idAula=?  ORDER BY e.nomeExercicio ASC";
-        String sql2 = "SELECT e.idExercicio, e.nomeExercicio, e.idGrupo, g.nomeGrupo, ae.serie, ae.quantidade, ae.peso FROM FITNESSXTREME.Exercicio AS e JOIN FITNESSXTREME.AulaExercicio AS ae ON e.idExercicio = ae.idExercicio JOIN FITNESSXTREME.Aula AS a ON ae.idAula = a.idAula JOIN FITNESSXTREME.Grupo AS g ON e.idGrupo = g.idGrupo WHERE a.idAula=?  ORDER BY g.nomeGrupo ASC";
+        String sql = "SELECT e.idExercicio, e.nomeExercicio, e.idGrupo, g.nomeGrupo, ae.serie, ae.peso FROM FITNESSXTREME.Exercicio AS e JOIN FITNESSXTREME.AulaExercicio AS ae ON e.idExercicio = ae.idExercicio JOIN FITNESSXTREME.Aula AS a ON ae.idAula = a.idAula JOIN FITNESSXTREME.Grupo AS g ON e.idGrupo = g.idGrupo WHERE a.idAula=?  ORDER BY e.nomeExercicio ASC";
+        String sql2 = "SELECT e.idExercicio, e.nomeExercicio, e.idGrupo, g.nomeGrupo, g.ordem, ae.serie, ae.peso FROM FITNESSXTREME.Exercicio AS e JOIN FITNESSXTREME.AulaExercicio AS ae ON e.idExercicio = ae.idExercicio JOIN FITNESSXTREME.Aula AS a ON ae.idAula = a.idAula JOIN FITNESSXTREME.Grupo AS g ON e.idGrupo = g.idGrupo WHERE a.idAula=?  ORDER BY g.ordem ASC";
         PreparedStatement stmt;
         ResultSet res;
         List<Exercicio> listaResExercicio = new ArrayList<>();
@@ -116,8 +116,7 @@ public class ExercicioDao {
                 exercicio.setNomeExercicio(res.getString("nomeExercicio"));
                 exercicio.getGrupo().setIdGrupo(res.getInt("idGrupo"));
                 exercicio.getGrupo().setNomeGrupo(res.getString("nomeGrupo"));
-                exercicio.setSerie(res.getInt("serie"));
-                exercicio.setQuantidade(res.getInt("quantidade"));
+                exercicio.setSerie(res.getString("serie"));
                 exercicio.setPeso(res.getInt("peso"));
                 listaResExercicio.add(exercicio);
             }

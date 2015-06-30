@@ -5,6 +5,7 @@
  */
 package com.auinfo.fitnessxtreme.controlador;
 
+import static com.auinfo.fitnessxtreme.controlador.TelaBaseControlador.ANTERIOR;
 import com.auinfo.fitnessxtreme.controlador.dao.AulaDao;
 import com.auinfo.fitnessxtreme.controlador.dao.SerieDao;
 import com.auinfo.fitnessxtreme.controlador.dao.UsuarioDao;
@@ -112,11 +113,15 @@ public class ConsultaSeriesControlador implements Initializable {
 
     @FXML
     private AnchorPane principal;
+    
+    @FXML
+    private Button btVoltar;
 
     int index = -1;
 
     private boolean validar[] = {false, false, false, false};
     Validacao valida = new Validacao();
+    Navegacao nav = new Navegacao();
 
     ObservableList<SerieTV> series;
     ObservableList<Usuario> usuariosCb;
@@ -179,6 +184,7 @@ public class ConsultaSeriesControlador implements Initializable {
         });
 
         //Action Event
+        btVoltar.setOnAction(event -> nav.navega(ANTERIOR));
         btNovo.setOnAction(event -> novo());
         btRemover.setOnAction(event -> remover());
         btSalvar.setOnAction(event -> cadastrar());
@@ -251,8 +257,6 @@ public class ConsultaSeriesControlador implements Initializable {
 
             sDao.abreConnection();
             if (sDao.deletaSerie(s)) {
-                System.out.println("Removido");
-                System.out.println("Removido: " + index);
                 series.remove(index);
 
                 alert.setTitle("Excluir Série");
@@ -272,13 +276,9 @@ public class ConsultaSeriesControlador implements Initializable {
 
     private void cadastrar() {
 
-        System.out.println("chegou aqui..... ");
-
         if (!validar()) {
             return;
         }
-
-        System.out.println("chegou aqui.validacao ");
 
         if (validaCb() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -292,13 +292,10 @@ public class ConsultaSeriesControlador implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
 
-        System.out.println("chegou aqui..... ");
-
         if ("Cadastrar".equals(btSalvar.getText())) {
             sDao.abreConnection();
             s.setIdSerie(sDao.adicionaSerie(s));
             if (s.getIdSerie() != 0) {
-                System.out.println("Cadastrado");
                 series.add(new SerieTV(s));
 
                 alert.setTitle("Cadastro de Série");
@@ -312,10 +309,8 @@ public class ConsultaSeriesControlador implements Initializable {
             sDao.fechaConnection();
             novo();
         } else if ("Salvar".equals(btSalvar.getText())) {
-            System.out.println("Clicou no Salvar");
             sDao.abreConnection();
             if (sDao.atualizaSerie(s)) {
-                System.out.println("Atualizado");
                 series.set(index, new SerieTV(s));
                 alert.setTitle("Atualização de Série");
                 alert.setContentText("Série atualizada com sucesso!");
@@ -333,7 +328,6 @@ public class ConsultaSeriesControlador implements Initializable {
     private void serieToForm() {
         Serie serie = tvSerie.getSelectionModel().getSelectedItem().getSerie();
         index = tvSerie.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
         Calendar cal = Calendar.getInstance();
 
         tfId.setText(serie.getIdSerie() + "");
@@ -436,28 +430,20 @@ public class ConsultaSeriesControlador implements Initializable {
             tfNome.setStyle(valida.vermelhoGradiente);
             resultado = false;
         }
-        System.out.println("Nome");
-        System.out.println(resultado);
         if (validar[1] == false) {
             tfDesc.setStyle(valida.vermelhoGradiente);
             resultado = false;
         }
-        System.out.println("DESC");
-        System.out.println(resultado);
         if (validar[2] == false) {
             dpInicio.setStyle(valida.vermelhoGradiente);
             dpInicio.setPromptText("");
             resultado = false;
         }
-        System.out.println("DP Inicio");
-        System.out.println(resultado);
         if (validar[3] == false) {
             dpFim.setStyle(valida.vermelhoGradiente);
             dpFim.setPromptText("");
             resultado = false;
         }
-        System.out.println("DP Fim");
-        System.out.println(resultado);
         if (!tfPeso1.getText().isEmpty()) {
             Double test = null;
             test = Double.parseDouble(tfPeso1.getText());
@@ -467,10 +453,8 @@ public class ConsultaSeriesControlador implements Initializable {
                 tfPeso1.setStyle(valida.vermelhoGradiente);
                 resultado = false;
             }
-            
+
         }
-        System.out.println("Peso1");
-        System.out.println(resultado);
         if (!tfPeso2.getText().isEmpty()) {
             Double test = null;
             test = Double.parseDouble(tfPeso2.getText());
@@ -481,8 +465,6 @@ public class ConsultaSeriesControlador implements Initializable {
                 resultado = false;
             }
         }
-        System.out.println("Peso2");
-        System.out.println(resultado);
         if (!tfPeso3.getText().isEmpty()) {
             Double test = null;
             test = Double.parseDouble(tfPeso3.getText());
@@ -492,10 +474,8 @@ public class ConsultaSeriesControlador implements Initializable {
                 tfPeso3.setStyle(valida.vermelhoGradiente);
                 resultado = false;
             }
-            
+
         }
-        System.out.println("Peso3");
-        System.out.println(resultado);
 
         return resultado;
 
@@ -553,7 +533,6 @@ class BotaoTabela extends TableCell<Serie, Boolean> {
             public void handle(ActionEvent actionEvent) {
                 tvSerie.getSelectionModel().select(getTableRow().getIndex());
                 ConsultaSeriesControlador.SERIE = tvSerie.getSelectionModel().getSelectedItem().getSerie();
-                System.out.println(tvSerie.getSelectionModel().getSelectedIndex());
                 CadastroAulaV2Controlador.AULA = null;
                 nav.navega("CadastroAula");
 
@@ -574,7 +553,6 @@ class BotaoTabela extends TableCell<Serie, Boolean> {
             public void handle(ActionEvent actionEvent) {
                 tvSerie.getSelectionModel().select(getTableRow().getIndex());
                 ConsultaSeriesControlador.SERIE = tvSerie.getSelectionModel().getSelectedItem().getSerie();
-                System.out.println(tvSerie.getSelectionModel().getSelectedIndex());
                 nav.navega("ConsultaAula");
             }
         });

@@ -175,7 +175,7 @@ public class CadastroAulaV2Controlador implements Initializable {
         cbExercicios.setItems(exerciciosCb);
 
         tcExercicio.setCellValueFactory(new PropertyValueFactory("nomeExercicio"));
-        tcSerie.setCellValueFactory(new PropertyValueFactory("serieCompleta"));
+        tcSerie.setCellValueFactory(new PropertyValueFactory("serie"));
         tcPeso.setCellValueFactory(new PropertyValueFactory("peso"));
 
         //Action Event
@@ -208,13 +208,15 @@ public class CadastroAulaV2Controlador implements Initializable {
                 }
             }
         });
-
-        System.out.println("End Inicialization");
-
     }
 
     private boolean validar() {
         boolean resultado = true;
+
+        validar[0] = valida.validaTexto(tfDescAula, 5);
+        validar[1] = valida.validaNumero(tfEsteira, 1);
+        validar[2] = valida.validaNumero(tfBicicleta, 1);
+        validar[3] = valida.validaNumero(tfElipticon, 1);
 
         if (validar[0] == false) {
             tfDescAula.setStyle(valida.vermelhoGradiente);
@@ -249,7 +251,9 @@ public class CadastroAulaV2Controlador implements Initializable {
 
     private void preencheAula() {
         AULA.setDescaula(tfDescAula.getText());
-        AULA.setImpresso(0);
+        if (btCadastrar.getText().equals("Cadastrar")) {
+            AULA.setImpresso(0);
+        }
         AULA.setRepetir(validaCbSemana());
         AULA.setSerie(ConsultaSeriesControlador.SERIE);
         AULA.setTempoelipticon(Integer.valueOf(tfElipticon.getText()));
@@ -311,7 +315,6 @@ public class CadastroAulaV2Controlador implements Initializable {
 
         alert.showAndWait();
         aDao.fechaConnection();
-        TelaBaseControlador.BORDERPANE.setBottom(TelaBaseControlador.getBottom());
         nav.navega("ConsultaAula");
     }
 
@@ -325,7 +328,6 @@ public class CadastroAulaV2Controlador implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            TelaBaseControlador.BORDERPANE.setBottom(TelaBaseControlador.getBottom());
             nav.navega("ConsultaAula");
         }
     }
@@ -400,14 +402,13 @@ public class CadastroAulaV2Controlador implements Initializable {
 
         if (e != null) {
 
-            e.setSerie(0);
-            
-            System.out.println(e.getIdExercicio());
-
             e = preencheSerie(e);
 
-            if (e.getSerie() != 0) {
+            if (e.getSerie() != null && !"".equals(e.getSerie())) {
                 exerciciosTabela.add(new ExercicioTV(e));
+                cbExercicios.getSelectionModel().clearSelection();
+                cbExercicios.setValue(null);
+                cbExercicios.requestFocus();
             }
         }
     }
@@ -456,14 +457,14 @@ public class CadastroAulaV2Controlador implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 int index = tvExercicios.getSelectionModel().getSelectedIndex();
-                
+
                 exerciciosTabela.remove(index);
-            } 
+            }
         }
     }
 
     private Exercicio preencheSerie(Exercicio e) {
-        boolean[] validos = {false, false, false};
+        boolean[] validos = {false, false};
         // Create the custom dialog.
         Dialog<Exercicio> dialog = new Dialog<>();
         dialog.setTitle("Cadastro Exercicio");
@@ -480,21 +481,16 @@ public class CadastroAulaV2Controlador implements Initializable {
         grid.setPadding(new Insets(20, 150, 10, 10));
 
         TextField serie = new TextField();
-        serie.setOnKeyReleased(event -> validos[0] = valida.validaNumero(serie, 1));
+        serie.setOnKeyReleased(event -> validos[0] = valida.validaTexto(serie, 3));
         serie.setPromptText("Serie");
-        TextField quantidade = new TextField();
-        quantidade.setOnKeyReleased(event -> validos[1] = valida.validaNumero(quantidade, 1));
-        quantidade.setPromptText("Quantidade");
         TextField peso = new TextField();
-        peso.setOnKeyReleased(event -> validos[2] = valida.validaNumero(peso, 1));
+        peso.setOnKeyReleased(event -> validos[1] = valida.validaNumero(peso, 1));
         peso.setPromptText("Peso");
 
         grid.add(new Label("Série:"), 0, 0);
         grid.add(serie, 1, 0);
-        grid.add(new Label("Quantidade:"), 0, 1);
-        grid.add(quantidade, 1, 1);
-        grid.add(new Label("Peso:"), 0, 2);
-        grid.add(peso, 1, 2);
+        grid.add(new Label("Peso:"), 0, 1);
+        grid.add(peso, 1, 1);
 
         // Enable/Disable login button depending on whether a username was entered.
         Node btOk = dialog.getDialogPane().lookupButton(ButtonType.OK);
@@ -512,11 +508,11 @@ public class CadastroAulaV2Controlador implements Initializable {
 
         // Convert the result to a username-password-pair when the login button is clicked.
         dialog.setResultConverter(dialogButton -> {
-            System.out.println("OK");
             if (dialogButton == ButtonType.OK && validos(validos)) {
-                e.setSerie(Integer.valueOf(serie.getText()));
-                e.setQuantidade(Integer.valueOf(quantidade.getText()));
+                e.setSerie(serie.getText());
+                System.out.println(e.getSerie());
                 e.setPeso(Integer.valueOf(peso.getText()));
+                System.out.println(e.getPeso());
                 return e;
             }
             return null;
@@ -530,18 +526,11 @@ public class CadastroAulaV2Controlador implements Initializable {
     private boolean validos(boolean validos[]) {
         boolean resultado = true;
 
-        System.out.println(validos[0]);
-        System.out.println(validos[1]);
-        System.out.println(validos[2]);
-
         if (!validos[0]) {
             resultado = false;
         } else if (!validos[1]) {
             resultado = false;
-        } else if (!validos[2]) {
-            resultado = false;
         }
-
         return resultado;
     }
 }

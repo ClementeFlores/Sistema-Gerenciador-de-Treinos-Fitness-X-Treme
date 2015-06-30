@@ -5,6 +5,7 @@
  */
 package com.auinfo.fitnessxtreme.controlador;
 
+import static com.auinfo.fitnessxtreme.controlador.TelaBaseControlador.ANTERIOR;
 import com.auinfo.fitnessxtreme.controlador.dao.AulaDao;
 import com.auinfo.fitnessxtreme.controlador.dao.ExercicioDao;
 import com.auinfo.fitnessxtreme.controlador.dao.GrupoDao;
@@ -41,38 +42,57 @@ public class CadastroExercicioControlador implements Initializable {
 
     @FXML
     private AnchorPane principal;
+    
     @FXML
     private TableView<ExercicioGrupoTV> tvExercicios;
+    
     @FXML
     private TableColumn<?, ?> tcExercicio;
+    
     @FXML
     private TableColumn<?, ?> tcGrupo;
+    
     @FXML
     private TextField tfPesquisar;
+    
     @FXML
     private TextField tfNomeExercicio;
+    
     @FXML
     private ComboBox<Grupo> cbGrupo;
+    
     @FXML
     private Button btEditarGrupo;
+    
     @FXML
     private Button btRemoverGrupoE;
+    
     @FXML
     private TextField tfIdExercicio;
+    
     @FXML
     private Button btNovoExercicio;
+    
     @FXML
     private Button btRemoverExercicio;
+    
     @FXML
     private Button btCadastrarExercicio;
+    
     @FXML
     private TextField tfNomeGrupo;
+    
     @FXML
     private TextField tfIdGrupo;
+    
     @FXML
     private Button btNovoGrupo;
+    
     @FXML
     private Button btCadastrarGrupo;
+    
+    @FXML
+    private Button btVoltar;
 
     int index = -1;
 
@@ -124,6 +144,7 @@ public class CadastroExercicioControlador implements Initializable {
         tvExercicios.setItems(filteredExercicios);
 
         //Action Event
+        btVoltar.setOnAction(event -> nav.navega(ANTERIOR));
         btCadastrarExercicio.setOnAction(event -> cadastrarExercicio());
         btNovoExercicio.setOnAction(event -> novoExercicio());
         btRemoverExercicio.setOnAction(event -> remover());
@@ -168,13 +189,11 @@ public class CadastroExercicioControlador implements Initializable {
             eDao.abreConnection();
             e.setIdExercicio(eDao.adicionaExercicio(e));
             if (e.getIdExercicio() != 0) {
-                System.out.println("Cadastrado");
                 exercicios.add(new ExercicioGrupoTV(e));
                 alert.setTitle("Cadastro de Exercicio");
                 alert.setContentText("Exercicio cadastrado com sucesso!");
                 alert.showAndWait();
             } else {
-                System.out.println("Erro ao cadastrar");
                 alert.setTitle("Cadastro de Exercicio");
                 alert.setContentText("Erro ao cadastrar o Exercicio!");
                 alert.showAndWait();
@@ -185,7 +204,6 @@ public class CadastroExercicioControlador implements Initializable {
 
             eDao.abreConnection();
             if (eDao.atualizaExercicio(e)) {
-                System.out.println("Atualizado");
                 exercicios.set(index, new ExercicioGrupoTV(e));
 
                 alert.setTitle("Atualizar Exercicio");
@@ -234,8 +252,6 @@ public class CadastroExercicioControlador implements Initializable {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Excluir Exercicio");
 
-        System.out.println(resultado);
-
         if (resultado) {
             alert.setHeaderText(null);
             alert.setContentText("Este exercicio não pode ser excluido, pois o mesmo esta sendo utilizado em uma ou mais Aulas");
@@ -248,8 +264,6 @@ public class CadastroExercicioControlador implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 if (eDao.deletaExercicio(e)) {
-                    System.out.println("Removido");
-                    System.out.println("Removido: " + index);
                     exercicios.remove(index);
                     alert.setTitle("Excluir Exercicio");
                     alert.setHeaderText(null);
@@ -293,13 +307,12 @@ public class CadastroExercicioControlador implements Initializable {
     private void exercicioToForm() {
         Exercicio exercicio = tvExercicios.getSelectionModel().getSelectedItem().getExercicio();
         index = tvExercicios.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
 
         tfIdExercicio.setText(exercicio.getIdExercicio() + "");
         tfNomeExercicio.setText(exercicio.getNomeExercicio() + "");
         int indexcb = -1;
         for (int i = 0; i < grupos.size(); i++) {
-            if(exercicio.getGrupo().getIdGrupo() == grupos.get(i).getIdGrupo()){
+            if (exercicio.getGrupo().getIdGrupo() == grupos.get(i).getIdGrupo()) {
                 indexcb = i;
                 break;
             }
@@ -313,6 +326,9 @@ public class CadastroExercicioControlador implements Initializable {
 
     private boolean validar() {
         boolean resultado = true;
+
+        validar[0] = valida.validaTexto(tfNomeExercicio, 2);
+        validar[1] = valida.validaCb(cbGrupo);
 
         if (validar[0] == false) {
             tfNomeExercicio.setStyle(valida.vermelhoGradiente);
@@ -330,7 +346,6 @@ public class CadastroExercicioControlador implements Initializable {
         if (cbGrupo.getSelectionModel().getSelectedItem() != null && cbGrupo.getSelectionModel().getSelectedIndex() != -1) {
             return (cbGrupo.getItems().get(cbGrupo.getSelectionModel().getSelectedIndex()));
         }
-        System.out.println("NULL GRUPO :'(");
         return null;
     }
 
@@ -348,8 +363,6 @@ public class CadastroExercicioControlador implements Initializable {
         eDao.fechaConnection();
 
         Alert alert = new Alert(AlertType.CONFIRMATION);
-
-        System.out.println(resultado);
 
         if (resultado) {
             alert.setHeaderText(null);
@@ -376,8 +389,6 @@ public class CadastroExercicioControlador implements Initializable {
                 indexCb = cbGrupo.getSelectionModel().getSelectedIndex();
 
                 if (gDao.deletaGrupo(validaCb())) {
-                    System.out.println("Removido");
-                    System.out.println("Removido: " + indexCb);
                     grupos.remove(indexCb);
                     alert.setContentText("Grupo excluido com sucesso!");
                     alert.showAndWait();
@@ -401,6 +412,8 @@ public class CadastroExercicioControlador implements Initializable {
 
     private void cadastrarGrupo() {
 
+        validar[2] = valida.validaTexto(tfNomeGrupo, 2);
+
         if (validar[2] == false) {
             tfNomeGrupo.setStyle(valida.vermelhoGradiente);
             return;
@@ -423,13 +436,11 @@ public class CadastroExercicioControlador implements Initializable {
             gDao.abreConnection();
             g.setIdGrupo(gDao.adicionaGrupo(g));
             if (g.getIdGrupo() != 0) {
-                System.out.println("Cadastrado");
                 grupos.add(g);
                 alert.setTitle("Cadastro de Grupo");
                 alert.setContentText("Grupo cadastrado com sucesso!");
                 alert.showAndWait();
             } else {
-                System.out.println("Erro ao cadastrar");
                 alert.setTitle("Cadastro de Grupo");
                 alert.setContentText("Erro ao cadastrar o Grupo!");
                 alert.showAndWait();
@@ -440,7 +451,6 @@ public class CadastroExercicioControlador implements Initializable {
 
             gDao.abreConnection();
             if (gDao.atualizaGrupo(g)) {
-                System.out.println("Atualizado");
                 grupos.set(indexGrupo, g);
 
                 alert.setTitle("Atualizar Grupo");

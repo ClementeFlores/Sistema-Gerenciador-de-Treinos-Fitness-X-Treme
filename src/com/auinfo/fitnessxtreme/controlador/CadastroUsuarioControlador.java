@@ -6,8 +6,8 @@
 package com.auinfo.fitnessxtreme.controlador;
 
 import com.auinfo.fitnessxtreme.biometria.LeitorBiometrico;
+import static com.auinfo.fitnessxtreme.controlador.TelaBaseControlador.ANTERIOR;
 import com.auinfo.fitnessxtreme.controlador.dao.UsuarioDao;
-import com.auinfo.fitnessxtreme.impressora.Impressora;
 import com.auinfo.fitnessxtreme.modelo.UsuarioTV;
 import com.auinfo.fitnessxtreme.modelo.Usuario;
 import static com.auinfo.fitnessxtreme.util.ManipulaConfigs.getProp;
@@ -107,6 +107,9 @@ public class CadastroUsuarioControlador implements Initializable {
 
     @FXML
     private Button btEsquerdo;
+    
+    @FXML
+    private Button btVoltar;
 
     Properties prop;
     boolean verificaDigital;
@@ -127,9 +130,9 @@ public class CadastroUsuarioControlador implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        
         try {
-            prop = getProp();
+            prop = getProp("config\\main.properties");
         } catch (IOException ex) {
             Logger.getLogger(CadastroUsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -161,6 +164,7 @@ public class CadastroUsuarioControlador implements Initializable {
         tvUsuario.setItems(filteredUsuarios);
 
         //Action Event
+        btVoltar.setOnAction(event -> nav.navega(ANTERIOR));
         btSalvar.setOnAction(event -> cadastrar());
         btNovo.setOnAction(event -> novo());
         btRemover.setOnAction(event -> remover());
@@ -204,13 +208,11 @@ public class CadastroUsuarioControlador implements Initializable {
             uDao.abreConnection();
             u.setIdUsuario(uDao.adicionaUsuario(u));
             if (u.getIdUsuario() != 0) {
-                System.out.println("Cadastrado");
                 usuarios.add(new UsuarioTV(u));
                 alert.setTitle("Cadastro de Usuario");
                 alert.setContentText("Usuario cadastrado com sucesso!");
                 alert.showAndWait();
             } else {
-                System.out.println("Erro ao cadastrar");
                 alert.setTitle("Cadastro de Usuario");
                 alert.setContentText("Erro ao cadastrar o Usuario!");
                 alert.showAndWait();
@@ -221,7 +223,6 @@ public class CadastroUsuarioControlador implements Initializable {
 
             uDao.abreConnection();
             if (uDao.atualizaUsuario(u)) {
-                System.out.println("Atualizado");
                 usuarios.set(index, new UsuarioTV(u));
 
                 alert.setTitle("Atualizar Usuario");
@@ -280,8 +281,6 @@ public class CadastroUsuarioControlador implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             if (uDao.deletaUsuario(u)) {
-                System.out.println("Removido");
-                System.out.println("Removido: " + index);
                 usuarios.remove(index);
                 alert.setTitle("Excluir Usuario");
                 alert.setHeaderText(null);
@@ -317,10 +316,7 @@ public class CadastroUsuarioControlador implements Initializable {
             for (int i = 0; i < listUsuario.size(); i++) {
 
                 if (biometria.verificar(listUsuario.get(i).getIndicadordireito(), lido) || biometria.verificar(listUsuario.get(i).getIndicadoresquerdo(), lido)) {
-                    System.out.println("Encontrou");
                     j = i;
-
-                    System.out.println("j= " + j);
                     break;
                 }
             }
@@ -382,8 +378,13 @@ public class CadastroUsuarioControlador implements Initializable {
         usuario.setObservacao(tfObservacao.getText());
         usuario.setEadministrador(cbAdministrador.isSelected());
         usuario.setSenha(pfSenha.getText());
-        usuario.setIndicadordireito(digDireito);
-        usuario.setIndicadoresquerdo(digEsquero);
+        if (digDireito == null || digEsquero == null) {
+            usuario.setIndicadordireito("0");
+            usuario.setIndicadoresquerdo("0");
+        } else {
+            usuario.setIndicadordireito(digDireito);
+            usuario.setIndicadoresquerdo(digEsquero);
+        }
         clear();
         return usuario;
     }
@@ -391,7 +392,6 @@ public class CadastroUsuarioControlador implements Initializable {
     private void usuarioToForm() {
         Usuario usuario = tvUsuario.getSelectionModel().getSelectedItem().getUsuario();
         index = tvUsuario.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
         Calendar cal = Calendar.getInstance();
 
         tfId.setText(usuario.getIdUsuario() + "");

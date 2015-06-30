@@ -10,14 +10,14 @@
 
 <AnchorPane id="AnchorPane" fx:id="principal" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auinfo.fitnessxtreme.controlador.ConfiguracaoControlador">
    <children>
-      <Pane layoutX="70.0" layoutY="80.0" prefHeight="491.0" prefWidth="507.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0">
+      <Pane layoutX="70.0" layoutY="80.0" prefHeight="493.0" prefWidth="540.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="80.0">
          <children>
             <Label alignment="CENTER" layoutY="10.0" prefHeight="45.0" prefWidth="505.0" text="Impressora">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <GridPane layoutY="60.0" prefHeight="430.0" prefWidth="439.0">
+            <GridPane layoutY="60.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="430.0" prefWidth="439.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="-Infinity" prefWidth="102.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="-Infinity" prefWidth="138.0" />
@@ -92,7 +92,7 @@
             <Font name="System Bold" size="35.0" />
          </font>
       </Label>
-      <Pane layoutX="590.0" layoutY="80.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="246.0" prefWidth="394.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="274.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
+      <Pane layoutX="590.0" layoutY="80.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="258.0" prefWidth="431.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="262.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="80.0">
          <children>
             <Label alignment="CENTER" layoutY="10.0" prefHeight="45.0" prefWidth="394.0" text="Leitor Biometrico">
                <font>
@@ -127,26 +127,47 @@
             </GridPane>
          </children>
       </Pane>
-      <Pane layoutX="576.0" layoutY="370.0" prefHeight="246.0" prefWidth="394.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="29.0" AnchorPane.rightAnchor="50.0">
+      <Pane layoutX="554.0" layoutY="336.0" prefHeight="193.0" prefWidth="431.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="15.0">
          <children>
-            <Label alignment="CENTER" layoutY="10.0" prefHeight="45.0" prefWidth="394.0" text="Sistema Operacional">
+            <Label alignment="CENTER" layoutY="10.0" prefHeight="45.0" prefWidth="394.0" text="Mostrar Console">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <RadioButton fx:id="cbX86" layoutY="112.0" mnemonicParsing="false" text="x86 (32 bits)">
+            <RadioButton fx:id="cbXSim" layoutY="112.0" mnemonicParsing="false" text="Sim">
                <padding>
                   <Insets left="30.0" />
                </padding>
                <toggleGroup>
                   <ToggleGroup fx:id="sistema" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="cbX64" layoutX="256.0" layoutY="112.0" mnemonicParsing="false" text="x64 (64 bits)" toggleGroup="$sistema">
+            <RadioButton fx:id="cbXNao" layoutX="256.0" layoutY="112.0" mnemonicParsing="false" text="Não" toggleGroup="$sistema">
                <padding>
                   <Insets right="30.0" />
                </padding></RadioButton>
-            <Button fx:id="btSalvar" layoutX="310.0" layoutY="201.0" mnemonicParsing="false" prefWidth="70.0" text="Salvar" />
+            <Label layoutX="14.0" layoutY="67.0" text="Necessário reiniciar o Sistema Fitness Xtreme" />
          </children>
       </Pane>
+      <GridPane layoutX="15.0" layoutY="580.0" prefHeight="47.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btSalvar" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Salvar" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btVoltar" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Voltar" GridPane.halignment="LEFT">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

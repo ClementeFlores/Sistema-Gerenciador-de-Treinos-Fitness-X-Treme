@@ -5,6 +5,7 @@
  */
 package com.auinfo.fitnessxtreme.controlador;
 
+import static com.auinfo.fitnessxtreme.controlador.TelaBaseControlador.ANTERIOR;
 import com.auinfo.fitnessxtreme.controlador.dao.AulaDao;
 import com.auinfo.fitnessxtreme.controlador.dao.ExercicioDao;
 import com.auinfo.fitnessxtreme.modelo.Aula;
@@ -106,6 +107,9 @@ public class ConsultaAulaControlador implements Initializable {
 
     @FXML
     private Button btEditarAula;
+    
+    @FXML
+    private Button btVoltar;
 
     Navegacao nav = new Navegacao();
 
@@ -156,6 +160,7 @@ public class ConsultaAulaControlador implements Initializable {
         tcPeso.setCellValueFactory(new PropertyValueFactory("peso"));
 
         //Action Event
+        btVoltar.setOnAction(event -> nav.navega(ANTERIOR));
         cbAulas.setOnAction(event -> buscarExercicios());
         btNovaAula.setOnAction(event -> novaAula());
         btRemoverAula.setOnAction(event -> removerAula());

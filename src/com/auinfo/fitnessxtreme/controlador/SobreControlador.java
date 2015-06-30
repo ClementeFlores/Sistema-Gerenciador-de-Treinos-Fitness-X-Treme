@@ -5,11 +5,12 @@
  */
 package com.auinfo.fitnessxtreme.controlador;
 
+import static com.auinfo.fitnessxtreme.controlador.TelaBaseControlador.ANTERIOR;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Accordion;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -23,7 +24,9 @@ public class SobreControlador implements Initializable {
     private AnchorPane principal;
     
     @FXML
-    private Accordion acTeste;
+    private Button btVoltar;
+    
+    Navegacao nav = new Navegacao();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -34,6 +37,11 @@ public class SobreControlador implements Initializable {
         
         TelaBaseControlador.ANTERIOR = "MenuPrincipal";
         
+        //ActionEvent
+        btVoltar.setOnAction(event -> {
+            TelaBaseControlador.BORDERPANE.setTop(TelaBaseControlador.getTop());
+            nav.navega(ANTERIOR);
+        });
         
     }    
     

@@ -27,22 +27,22 @@ import java.util.Properties;
  */
 public class ManipulaConfigs {
 
-    public static Properties getProp() throws IOException {
+    public static Properties getProp(String local) throws IOException {
         Properties props = new Properties();
         FileInputStream file;
-        file = new FileInputStream("config\\main.properties");
+        file = new FileInputStream(local);
         props.load(file);
         file.close();
         return props;
     }
 
-    public static boolean setProp(String config, String valor) throws IOException {
+    public static boolean setProp(String config, String valor, String local) throws IOException {
         Properties propSalvar = new Properties();
         try {
-            FileInputStream arquivoIn = new FileInputStream("config\\main.properties");
+            FileInputStream arquivoIn = new FileInputStream(local);
             propSalvar.load(arquivoIn);
             arquivoIn.close();
-            FileOutputStream arquivoOut = new FileOutputStream("config\\main.properties");
+            FileOutputStream arquivoOut = new FileOutputStream(local);
             propSalvar.setProperty(config, valor);
             propSalvar.store(arquivoOut, null);
             arquivoOut.close();
@@ -51,25 +51,5 @@ public class ManipulaConfigs {
             return false;
             //JOptionPane.showMessageDialog(null, "Não Foi possível salvar dados no arquivo config.properties\n" + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    public static void main(String args[]) throws IOException {
-        String modelo;
-        String endereco;
-
-        System.out.println("************Teste de leitura do arquivo de propriedades************");
-
-        boolean newProp = setProp("prop.debug.console", "true");
-        if (newProp) {
-            System.out.println("Alterou com sucesso!");
-        }
-        
-        Properties prop = getProp();
-
-        modelo = prop.getProperty("prop.impressora.modelo");
-        endereco = prop.getProperty("prop.impressora.endereco");
-
-        System.out.println("Modelo Caixa = " + modelo);
-        System.out.println("Endereco Caixa = " + endereco);
     }
 }

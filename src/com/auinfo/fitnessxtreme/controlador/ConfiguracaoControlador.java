@@ -5,6 +5,7 @@
  */
 package com.auinfo.fitnessxtreme.controlador;
 
+import static com.auinfo.fitnessxtreme.controlador.TelaBaseControlador.ANTERIOR;
 import com.auinfo.fitnessxtreme.util.ManipulaConfigs;
 import static com.auinfo.fitnessxtreme.util.ManipulaConfigs.getProp;
 import com.auinfo.fitnessxtreme.util.Validacao;
@@ -71,16 +72,19 @@ public class ConfiguracaoControlador implements Initializable {
     private RadioButton cbLeitorNao;
 
     @FXML
-    private RadioButton cbX86;
+    private RadioButton cbXSim;
 
     @FXML
     private ToggleGroup sistema;
 
     @FXML
-    private RadioButton cbX64;
+    private RadioButton cbXNao;
 
     @FXML
     private Button btSalvar;
+    
+    @FXML
+    private Button btVoltar;
 
     Validacao valida = new Validacao();
 
@@ -90,8 +94,10 @@ public class ConfiguracaoControlador implements Initializable {
     private String enderecoImpressora;
     private boolean imprimirLogo;
     private boolean verificaDigital;
-    private boolean sistema32bits;
+    private boolean console;
     private boolean[] validar = {false, false, false, false, false, false};
+    
+    Navegacao nav = new Navegacao();
 
     /**
      * Initializes the controller class.
@@ -107,7 +113,7 @@ public class ConfiguracaoControlador implements Initializable {
         TelaBaseControlador.ANTERIOR = "MenuPrincipal";
 
         try {
-            prop = getProp();
+            prop = getProp("config\\main.properties");
         } catch (IOException ex) {
             Logger.getLogger(ConfiguracaoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -117,6 +123,7 @@ public class ConfiguracaoControlador implements Initializable {
         preencheCampos();
 
         //Action Event
+        btVoltar.setOnAction(event -> nav.navega(ANTERIOR));
         cbEthernet.setOnAction(event -> validaEthernet());
         cbParalela.setOnAction(event -> validaEthernet());
         cbUsb.setOnAction(event -> validaEthernet());
@@ -136,7 +143,7 @@ public class ConfiguracaoControlador implements Initializable {
 
         verificaDigital = Boolean.parseBoolean(prop.getProperty("prop.biometria.digital"));
 
-        sistema32bits = Boolean.parseBoolean(prop.getProperty("prop.sistema.sistema32bits"));
+        console = Boolean.parseBoolean(prop.getProperty("prop.sistema.console"));
 
         //Configurando a opção selecionada na Combo Box
         switch (modeloImpressora) {
@@ -185,10 +192,10 @@ public class ConfiguracaoControlador implements Initializable {
             cbLeitorNao.setSelected(true);
         }
 
-        if (sistema32bits) {
-            cbX86.setSelected(true);
+        if (console) {
+            cbXSim.setSelected(true);
         } else {
-            cbX64.setSelected(true);
+            cbXNao.setSelected(true);
         }
     }
 
@@ -230,19 +237,19 @@ public class ConfiguracaoControlador implements Initializable {
             verificaDigital = false;
         }
 
-        if (cbX86.isSelected()) {
-            sistema32bits = true;
+        if (cbXSim.isSelected()) {
+            console = true;
         } else {
-            sistema32bits = false;
+            console = false;
         }
 
         try {
-            validar[0] = ManipulaConfigs.setProp("prop.impressora.modelo", String.valueOf(modeloImpressora));
-            validar[1] = ManipulaConfigs.setProp("prop.impressora.interface", interfaceImpressora);
-            validar[2] = ManipulaConfigs.setProp("prop.impressora.endereco", enderecoImpressora);
-            validar[3] = ManipulaConfigs.setProp("prop.impressora.logo", imprimirLogo + "");
-            validar[4] = ManipulaConfigs.setProp("prop.biometria.digital", verificaDigital + "");
-            validar[5] = ManipulaConfigs.setProp("prop.sistema.sistema32bits", sistema32bits + "");
+            validar[0] = ManipulaConfigs.setProp("prop.impressora.modelo", String.valueOf(modeloImpressora),"config\\main.properties");
+            validar[1] = ManipulaConfigs.setProp("prop.impressora.interface", interfaceImpressora, "config\\main.properties");
+            validar[2] = ManipulaConfigs.setProp("prop.impressora.endereco", enderecoImpressora, "config\\main.properties");
+            validar[3] = ManipulaConfigs.setProp("prop.impressora.logo", imprimirLogo + "", "config\\main.properties");
+            validar[4] = ManipulaConfigs.setProp("prop.biometria.digital", verificaDigital + "", "config\\main.properties");
+            validar[5] = ManipulaConfigs.setProp("prop.sistema.console", console + "", "config\\main.properties");
         } catch (IOException ex) {
             Logger.getLogger(ConfiguracaoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }

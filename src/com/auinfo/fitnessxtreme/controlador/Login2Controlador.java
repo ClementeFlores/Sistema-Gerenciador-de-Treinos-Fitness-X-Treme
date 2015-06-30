@@ -6,7 +6,6 @@
 package com.auinfo.fitnessxtreme.controlador;
 
 import com.auinfo.fitnessxtreme.controlador.dao.UsuarioDao;
-import com.auinfo.fitnessxtreme.impressora.Impressora;
 import com.auinfo.fitnessxtreme.modelo.Usuario;
 import com.auinfo.fitnessxtreme.util.Validacao;
 import java.net.URL;
@@ -20,7 +19,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
 
 /**
  * FXML Controller class
@@ -40,9 +38,6 @@ public class Login2Controlador implements Initializable {
 
     @FXML
     private Label lbSenha;
-
-    @FXML
-    private Label lbAdmin;
 
     @FXML
     private Button btLogar;
@@ -96,13 +91,12 @@ public class Login2Controlador implements Initializable {
                 if (usuario.getEadministrador()) {
                     lbSenha.setVisible(true);
                     pfSenha.setVisible(true);
-                    lbAdmin.setVisible(true);
                     this.admin = true;
                     pfSenha.requestFocus();
 
                 } else {
-                    new Impressora(usuario);
-                    nav.navega("Login");
+                    TelaBaseControlador.usuario = usuario;
+                    nav.navega("Imprimir");
                 }
 
             } else {
@@ -117,7 +111,6 @@ public class Login2Controlador implements Initializable {
 
             if (pfSenha.getText().equals(usuario.getSenha())) {
                 TelaBaseControlador.BORDERPANE.setTop(TelaBaseControlador.getTop());
-                TelaBaseControlador.BORDERPANE.setBottom(TelaBaseControlador.getBottom());
                 nav.navega("MenuPrincipal");
             } else {
                 Alert alert = new Alert(AlertType.ERROR);
